@@ -8,6 +8,7 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/.scripts
 export TERM=xterm-256color
 export EDITOR="nvim"
 export BROWSER="firefox"
+#export BROWSER="qutebrowser"
 export READER="zathura"
 export QT_QPA_PLATFORMTHEME=qt5ct
 

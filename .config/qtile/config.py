@@ -50,30 +50,37 @@ keys = [
         desc="Move window up"
         ),
 
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
+    # Change windowsize.
+    ## In 'columns' layout
+    Key([mod, "control"], "h",
+        lazy.layout.grow_left().when(layout='columns'),
+        desc="Grow window to the right"
+        ),
     Key([mod, "control"], "j",
         lazy.layout.grow_down().when(layout='columns'),
-        lazy.layout.grow().when(layout='verticaltile'),
         desc="Grow window to the down"
         ),
     Key([mod, "control"], "k",
-        lazy.layout.grow_up().when(layout='monadtall'),
-        lazy.layout.shrink().when(layout='verticaltile'),
+        lazy.layout.grow_up().when(layout='columns'),
         desc="Grow window to the up"
-        ),
-    Key([mod, "control"], "h",
-        lazy.layout.grow_left().when(layout='columns'),
-        lazy.layout.grow().when(layout='monadtall'),
-        desc="Grow window to the right"
         ),
     Key([mod, "control"], "l",
         lazy.layout.grow_right().when(layout='columns'),
-        lazy.layout.shrink().when(layout='monadtall'),
         desc="Grow window to the left"
         ),
+    ## In monadtall and verticaltile
+    Key([mod, "control"], "i",
+        lazy.layout.grow().when(layout='monadtall'),
+        desc="Grow in size"
+        ),
+    Key([mod, "control"], "m",
+        lazy.layout.shrink().when(layout='monadtall'),
+        lazy.layout.maximize().when("verticaltile"),
+        desc="Grow window to the left"
+        ),
+    # Normalize all
     Key([mod, "control"], "n",
-        lazy.layout.normalize().when(layout='columns'),
+        lazy.layout.normalize().when(layout=['columns','verticaltile']),
         lazy.layout.reset().when(layout='monadtall'),
         desc="Reset all window sizes"
         ),
@@ -188,10 +195,10 @@ keys = [
         lazy.spawn("qutebrowser"),
         desc="Launch QuteBrowser"
         ),
-    ## nyxt
+    ## Brave
     Key([mod], "b",
-        lazy.spawn("/home/yoda/Activities/OSS/Wexond.AppImage"),
-        desc="Launch Chromium"
+        lazy.spawn("/home/yoda/Activities/OSS/waterfox/waterfox-bin"),
+        desc="Launch waterfox"
         ),
 
     #configs (for xterm add -wf)
@@ -213,7 +220,7 @@ keys = [
     
     #PowerMenu
     Key([mod, "shift"],"p",
-        lazy.spawn("/home/yoda/.config/rofi/powermenu/powermenu.sh")
+        lazy.spawn("powermenu")
         ),
 
     #File manager (Thunar)
@@ -224,13 +231,13 @@ keys = [
 
     # Rofi
     Key(["mod1"], "Return",
-        lazy.spawn("rofi -show drun"),
-        desc="Launch rofi app launcher"
+        lazy.spawn("dmenu_mod"),
+        desc="dmenu"
         ),
     # Rofi-Pass
     Key([mod, "mod1"], "Return",
-        lazy.spawn("rofi-pass"),
-        desc="Rofi-Pass"
+        lazy.spawn("passmenu_mod"),
+        desc="pass"
         ),
 
     #LibreOffice
@@ -263,8 +270,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layout_theme = {"border_width": 1,
                 "margin": 8,
-                "border_focus": "#555555",#"6BA7C0",
-                "border_normal": "#303232"#"1D2330"
+                "border_focus": "#555555",
+                "border_normal": "#303232"
                 }
 
 layouts = [
@@ -299,7 +306,7 @@ screens = [
 			rounded=False,
 			highlight_method="line",
 			inactive = "888888",
-			highlight_color="#444444",#["#3d3f4b", "#434758"],
+			highlight_color="#444444",
 			foreground="#ffffff",
             disable_drag=True
 			),
@@ -377,12 +384,18 @@ screens = [
             ),
         widget.Clock(
 			padding=5,
-            format=' %H:%M',#%d %B
+            format=' %H:%M',
             mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("dateandtime")}
 			),
+        widget.TextBox(
+            text = "",
+            #foreground="#AA7700",
+            padding = 10,
+            mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("powermenu")}
+            ),
             ],
             34,
-	    background="#1b1d24",#"#282c34",
+	    background="#1b1d24",
         #margin=[8, 8, 0, 8],
 	    #opacity=0.1
         ),
