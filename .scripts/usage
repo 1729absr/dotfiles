@@ -1,0 +1,15 @@
+#!/bin/sh
+case $1 in
+	m)
+		notify-send "$(free -h | awk '/^Mem:/ {print $3 "/" $2}')"
+		;;
+	t)
+		notify-send "$(sensors | awk '/^CPU/ {print $2}')"
+		;;
+	mh)
+		notify-send "$(ps axch -o cmd:15,%mem --sort=-%mem | sed 15q)"
+		;;
+	ch)
+		notify-send "$(ps axch -o cmd:15,%cpu --sort=-%cpu | sed 15q)"
+		;;
+esac

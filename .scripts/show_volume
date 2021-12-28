@@ -1,0 +1,17 @@
+#!/usr/bin/sh
+volume=$(pactl get-sink-volume @DEFAULT_SINK@|awk '{print $5}'|sed 's/[^0-9]*//g')
+[ $(pactl get-sink-mute @DEFAULT_SINK@|awk '{print $2}') = yes ] && echo -n " 婢 0%" && exit
+
+if [ $volume -gt 75 ]; then
+	icon=""
+elif [ $volume -gt 25 ]; then
+         icon="墳"
+elif [ $volume -gt 15 ]; then
+         icon=""
+elif [ $volume -gt 0 ];then
+	icon=""
+else
+	echo -n " 婢 0%" && exit
+fi
+
+echo -n " $icon $volume%"

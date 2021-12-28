@@ -1,0 +1,3 @@
+#!/bin/sh
+time="scrot_"$(date '+%Y-%m-%d_%H-%M-%S')".png"
+import /home/yoda/Pictures/Scrot/$time

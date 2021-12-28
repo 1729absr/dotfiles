@@ -1,0 +1,66 @@
+#!/usr/bin/sh
+
+battery="/sys/class/power_supply/BAT0"
+percent="$(cat "$battery/capacity" 2>&1)"
+status="$(cat "$battery/status" 2>&1)"
+case "$status" in
+	"Full") icon="" ;;
+	"Discharging")
+		if [ $percent = 100 ]; then
+		    icon=""
+		elif [ $percent -gt 89 ]; then
+		    icon=""
+		elif [ $percent -gt 79 ]; then
+		    icon=""
+		elif [ $percent -gt 69 ]; then
+		    icon=""
+		elif [ $percent -gt 59 ]; then
+		    icon=""
+		elif [ $percent -gt 49 ]; then
+		    icon=""
+		elif [ $percent -gt 39 ]; then
+		    icon=""
+		elif [ $percent -gt 30 ]; then
+		    icon=""
+		elif [ $percent = 30 ]; then
+		    icon=""
+		    $("dunstify -r '55555' -u normal '$percent % is remaining'")
+		elif [ $percent -gt 19 ]; then
+		    icon=""
+		elif [ $percent = 20 ]; then
+		    icon=""
+		    $("dunstify -r '55555' -u normal '$percent % is remaining'")
+		elif [ $percent -gt 10 ]; then
+		    icon=""
+		elif [ $percent = 10 ]; then
+		    icon=""
+		    $("dunstify -r '55555' -u critical '$percent % is remaining'")
+		elif [ $percent -ge 0 ]; then
+		    icon=""
+		fi ;;
+
+	"Charging")
+		if [ $percent = 100 ]; then
+			icon=""
+		elif [ $percent -gt 89 ]; then
+			icon=""
+		elif [ $percent -gt 69 ]; then
+			icon=""
+		elif [ $percent -gt 49 ]; then
+			icon=""
+		elif [ $percent -gt 39 ]; then
+			icon=""
+		elif [ $percent -gt 29 ]; then
+			icon=""
+		elif [ $percent -ge 0 ]; then
+			icon=""
+		fi ;;
+
+	"Not charging") icon="🛑" ;;
+	"Unknown") icon="" ;;
+	*) exit 1 ;;
+esac
+# Will make a warn variable if discharging and low
+#[ "$status" = "" ] && [ "$capacity" -le 25 ] && warn="❗"
+# Prints the info
+printf "%s %d%%" "$icon" "$percent";

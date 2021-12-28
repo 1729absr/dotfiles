@@ -1,0 +1,10 @@
+#!/usr/bin/sh
+
+. $HOME/.scripts/dmenu_color
+
+passmenu -nb $COLOR_BACKGROUND \
+    -nf $COLOR_DEFAULT \
+    -sf $COLOR_HIGHLIGHT \
+    -sb $SELECTED_BACKGROUND \
+    -fn "MononokiNerdFont-20"\
+    -i -l 10

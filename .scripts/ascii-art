@@ -1,0 +1,8 @@
+#!/bin/sh
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+# Drawing the PACMAN
+echo -e "${BLUE} .--."
+echo -e "${BLUE}/ _.-'${RED} .-.  .-.  .-."
+echo -e "${BLUE}\  '-.${RED} '-'  '-'  '-'"
+echo -e "${BLUE} '--'"
