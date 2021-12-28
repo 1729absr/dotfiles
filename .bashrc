@@ -64,6 +64,15 @@ alias yt='yt-dlp -o "/home/yoda/Videos/%(title)s.%(ext)s" --add-metadata -ic $(x
 alias yta='yt-dlp -o "/home/yoda/Music/%(title)s.%(ext)s" --add-metadata -xic $(xclip -o)'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
+## Dmenu
+. $HOME/.scripts/dmenu_color
+alias dmenu='dmenu -nb $COLOR_BACKGROUND \
+	-nf $COLOR_DEFAULT \
+	-sf $COLOR_HIGHLIGHT \
+	-sb $SELECTED_BACKGROUND \
+	-fn "MononokiNerdFont-20"\
+	-i -l 10'
+
 ## Window Swallowing
 alias mpv='devour mpv'
 alias zathura='devour zathura'
@@ -71,17 +80,7 @@ alias feh='devour feh'
 alias ffplay='devour ffplay'
 alias scrcpy='devour scrcpy'
 
-# ASCII-Art
-#ascii-art
-
 # Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-# Not supported in the "fish" shell.
 (cat ~/.cache/wal/sequences &)
-
-# Alternative (blocks terminal for 0-3ms)
-cat ~/.cache/wal/sequences
-
 # To add support for TTYs this line can be optionally added.
 source ~/.cache/wal/colors-tty.sh

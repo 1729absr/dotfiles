@@ -204,17 +204,17 @@ keys = [
     #configs (for xterm add -wf)
     ## qtile
     Key([mod], "F1",
-        lazy.spawn("lxterminal -e nvim /home/yoda/.config/qtile/config.py"),
+        lazy.spawn(terminal+" -e nvim /home/yoda/.config/qtile/config.py"),
         desc="Qtile config"
         ),
     ### qtile autostart
     Key([mod], "F2",
-        lazy.spawn("lxterminal -e nvim /home/yoda/.config/qtile/autostart.sh"),
+        lazy.spawn(terminal+" -e nvim /home/yoda/.config/qtile/autostart.sh"),
         desc="Qtile config"
         ),
     ## picom
     Key([mod], "F3",
-        lazy.spawn("lxterminal -e nvim /home/yoda/.config/picom/picom.conf"),
+        lazy.spawn(terminal+" -e nvim /home/yoda/.config/picom/picom.conf"),
         desc="picom config"
         ),
     
@@ -223,21 +223,28 @@ keys = [
         lazy.spawn("powermenu")
         ),
 
-    #File manager (Thunar)
+    #File manager
+    ## Thunar
     Key([mod], "t",
         lazy.spawn("thunar"),
         desc="Launch Thunar"
         ),
 
-    # Rofi
+
+    # dmenu
     Key(["mod1"], "Return",
         lazy.spawn("dmenu_mod"),
         desc="dmenu"
         ),
-    # Rofi-Pass
+    # dmenu-Pass
     Key([mod, "mod1"], "Return",
         lazy.spawn("passmenu_mod"),
         desc="pass"
+        ),
+    # dmenu-emoji
+    Key([mod], "e",
+        lazy.spawn("dmenuunicode"),
+        desc="Emoji support"
         ),
 
     #LibreOffice
@@ -253,7 +260,7 @@ keys = [
 ]
 
 group_names = [("", {'layout': 'monadtall'}),
-               ("", {'layout': 'max'}),
+               ("", {'layout': 'monadtall'}),
                ("", {'layout': 'monadtall'}),
                ("", {'layout': 'monadtall'}),
                ("", {'layout': 'monadtall'}),
@@ -270,7 +277,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layout_theme = {"border_width": 1,
                 "margin": 8,
-                "border_focus": "#555555",
+                "border_focus": "#ffffff",
                 "border_normal": "#303232"
                 }
 
@@ -365,14 +372,14 @@ screens = [
             change_command="brightnessctl -s set {0}%",
             step=2
 			),
-#        widget.GenPollText(
-#            update_interval=0.08,
-#            func=lambda: subprocess.check_output("show_volume").decode(),
-#            mouse_callbacks={'Button4': lambda: qtile.cmd_spawn("change_volume +2%", shell=True),
-#            'Button5': lambda: qtile.cmd_spawn("change_volume -2%", shell=True),
-#            'Button3': lambda: qtile.cmd_spawn("change_volume toggle", shell=True),
-#            'Button2': lambda: qtile.cmd_spawn("pavucontrol", shell=True),}
-#            ),
+        widget.GenPollText(
+            update_interval=1,
+            func=lambda: subprocess.check_output("show_volume").decode(),
+            mouse_callbacks={'Button4': lambda: qtile.cmd_spawn("change_volume +2%", shell=True),
+            'Button5': lambda: qtile.cmd_spawn("change_volume -2%", shell=True),
+            'Button3': lambda: qtile.cmd_spawn("change_volume toggle", shell=True),
+            'Button2': lambda: qtile.cmd_spawn("pavucontrol", shell=True),}
+            ),
         widget.TextBox(
             text = " ",
             padding = 0
@@ -380,7 +387,6 @@ screens = [
         widget.GenPollText(
             update_interval=2,
             func=lambda: subprocess.check_output("battery").decode(),
-            mouse_callbacks={'Button1': lambda: qtile.cmd_spawn("battery --c left-click", shell=True)}
             ),
         widget.Clock(
 			padding=5,
@@ -438,6 +444,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(wm_class='pavucontrol'), # pavucontrol-gtk
     Match(wm_class='pinentry-gtk-2'), #Pass
+    Match(wm_class='matplotlib'),
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
 ],**layout_theme)

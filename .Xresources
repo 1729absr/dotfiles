@@ -8,8 +8,6 @@ Xft.lcdfilter: lcdfilter
 
 XTerm*renderFont: true
 XTerm*faceName: xft:Mononoki Nerd Font,
-!xft:JoyPixels:size=12, \
-!xft:Monospace:style=Medium:size=12   
 XTerm*faceSize: 18
 XTerm*utf8: 2
 XTerm*locale: true
@@ -30,8 +28,6 @@ XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 
 UXTerm*renderFont: true
 UXTerm*faceName: xft:Mononoki Nerd Font,
-!xft:JoyPixels:size=12, \
-!xft:Monospace:style=Medium:size=12   
 UXTerm*faceSize: 18
 UXTerm*utf8: 2
 UXTerm*locale: true
@@ -81,56 +77,14 @@ URxvt.matcher.button: 1
 URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 URxvt*depth: 32
-!
-!! COLORS FOR SXIV
-!Sxiv.foreground:   #bbc2cf
-!Sxiv.background:   #282c34
-!Sxiv.font: Ubuntu:style=bold:size=11
 
 
 !!! FOR ALL OTHER PROGRAMS USE XRESOURCES
 !!! This includes xterm and urxvt
-!!*.foreground:   #bbc2cf
-!!*.background:   #282c34
-!!*.cursorColor:  #bbc2cf
-!!
-!!! black
-!!*.color0:       #1c1f24
-!!*.color8:       #5b6268
-!!
-!!! red
-!!*.color1:       #ff6c6b
-!!*.color9:       #da8548
-!!
-!!! green
-!!*.color2:       #98be65
-!!*.color10:      #4db5bd
-!!
-!!! yellow
-!!*.color3:       #da8548
-!!*.color11:      #ecbe7b
-!!
-!!! blue
-!!*.color4:       #51afef
-!!*.color12:      #3071db
-!!
-!!! magenta
-!!*.color5:       #c678dd
-!!*.color13:      #a9a1e1
-!!
-!!! cyan
-!!*.color6:       #5699af
-!!*.color14:      #46d9ff
-!!
-!!! white
-!!*.color7:       #202328
-!!*.color15:      #dfdfdf
-
 ! Dracula Xresources palette
 *.foreground: #F8F8F2
 *.background: #222222
-!#282b34
-!#282A36
+
 *.color0:     #000000
 *.color8:     #4D4D4D
 *.color1:     #FF5555
@@ -147,3 +101,9 @@ URxvt*depth: 32
 *.color14:    #9AEDFE
 *.color7:     #BFBFBF
 *.color15:    #E6E6E6
+
+#include "/home/yoda/.cache/wal/colors.Xresources"
+
+!! Sxiv
+Sxiv.foreground: #99AAAA
+Sxiv.font: MononokiNerdFont-14
