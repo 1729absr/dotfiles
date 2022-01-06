@@ -11,6 +11,7 @@ export BROWSER="firefox"
 #export BROWSER="qutebrowser"
 export READER="zathura"
 export QT_QPA_PLATFORMTHEME=qt5ct
+export RANGER_LOAD_DEFAULT_RC=FALSE
 
 # XDG Base Directory
 export XDG_CONFIG_HOME=$HOME/.config

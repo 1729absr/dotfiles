@@ -1,0 +1,24 @@
+#!/usr/bin/sh
+bright=$(pactl get-sink-volume @DEFAULT_SINK@|awk '{print $5}'|sed 's/[^0-9]*//g')
+[ $(pactl get-sink-mute @DEFAULT_SINK@|awk '{print $2}') = yes ] && echo -n "  0%" && exit
+if [ $bright = 100 ]; then
+	icon=""
+elif [ $bright -gt 90 ]; then
+	icon=""
+elif [ $bright -gt 80 ]; then
+         icon=""
+elif [ $bright -gt 70 ]; then
+         icon=""
+elif [ $bright -gt 65 ];then
+	icon=""
+elif [ $bright -gt 60 ];then
+	icon=""
+elif [ $bright -gt 55 ];then
+	icon=""
+elif [ $bright -gt 50 ];then
+	icon=""
+else
+	echo -n "  0%" && exit
+fi
+
+echo -n " $icon $bright%"

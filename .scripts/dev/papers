@@ -1,0 +1,12 @@
+#!/usr/bin/sh
+
+. $HOME/.scripts/dmenu_color
+
+chosen=$(cut -d $'\t' -f1,2 $HOME/.local/share/papers.list | dmenu\
+	-nb $COLOR_BACKGROUND \
+	-nf $COLOR_DEFAULT \
+	-sf $COLOR_HIGHLIGHT \
+	-sb $SELECTED_BACKGROUND \
+	-fn 'MononokiNerdFont-20'\
+	-i -p \
+	"Search:" -l 10)

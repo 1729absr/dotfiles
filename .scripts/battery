@@ -24,17 +24,17 @@ case "$status" in
 		    icon=""
 		elif [ $percent = 30 ]; then
 		    icon=""
-		    $("dunstify -r '55555' -u normal '$percent % is remaining'")
-		elif [ $percent -gt 19 ]; then
+		    $(dunstify -r 555555 -u normal "$percent % of the battery is remaining")
+		elif [ $percent -gt 20 ]; then
 		    icon=""
 		elif [ $percent = 20 ]; then
 		    icon=""
-		    $("dunstify -r '55555' -u normal '$percent % is remaining'")
-		elif [ $percent -gt 10 ]; then
+		    $(dunstify -r 555555  -u normal "$percent % of the battery is remaining")
+	    	elif [ $percent -gt 10 ]; then
 		    icon=""
 		elif [ $percent = 10 ]; then
-		    icon=""
-		    $("dunstify -r '55555' -u critical '$percent % is remaining'")
+		    icon=""
+		    $(dunstify -r 555555  -u critical "$percent % of the battery is remaining")
 		elif [ $percent -ge 0 ]; then
 		    icon=""
 		fi ;;
@@ -60,7 +60,4 @@ case "$status" in
 	"Unknown") icon="" ;;
 	*) exit 1 ;;
 esac
-# Will make a warn variable if discharging and low
-#[ "$status" = "" ] && [ "$capacity" -le 25 ] && warn="❗"
-# Prints the info
 printf "%s %d%%" "$icon" "$percent";
