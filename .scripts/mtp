@@ -1,0 +1,35 @@
+#!/bin/sh
+
+. $HOME/.scripts/dmenu_color
+alias dmenu='dmenu -nb $COLOR_BACKGROUND \
+	-nf $COLOR_DEFAULT \
+	-sf $COLOR_HIGHLIGHT \
+	-sb $SELECTED_BACKGROUND \
+	-fn "MononokiNerdFont-20"\
+	-i -l 2'
+
+mountandroid() { \
+	chosen="$(echo "$anddrives" | dmenu -p "Which Android device?")" || exit 1
+	mp="$HOME/"$(simple-mtpfs -l|awk '{print $2}')"_"$(lsusb|grep MTP| awk '{print $6}')
+	mkdir $mp
+	chosen="$(echo "$chosen" | cut -d : -f 1)"
+        simple-mtpfs --device "$chosen" "$mp"
+	echo "OK" | dmenu -i -p "Tap Allow on your phone if it asked and then press enter" || exit 1
+	simple-mtpfs --device "$chosen" "$mp"
+	lxterminal -e ranger $mp
+	}
+
+umountandroid() { \
+	chosen="$(echo "$anddrives" | dmenu -p "Which Android device?")" || exit 1
+	mp="$HOME/"$(simple-mtpfs -l|awk '{print $2}')"_"$(lsusb|grep MTP| awk '{print $6}')
+        fusermount -u "$mp"
+	rm -r $mp
+	}
+
+
+anddrives=$(simple-mtpfs -l 2>/dev/null)
+case $1 in
+	-u)
+		umountandroid && exit;;
+esac
+mountandroid

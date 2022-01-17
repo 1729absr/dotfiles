@@ -7,4 +7,4 @@ passmenu -nb $COLOR_BACKGROUND \
     -sf $COLOR_HIGHLIGHT \
     -sb $SELECTED_BACKGROUND \
     -fn "MononokiNerdFont-20"\
-    -i -l 10
+    -i -l 10 -p "Pass:"

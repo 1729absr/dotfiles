@@ -9,7 +9,7 @@ chosen=$(cut -d ';' -f1 ~/.local/share/dmenu/emoji | dmenu \
     -sf $COLOR_HIGHLIGHT \
     -sb $SELECTED_BACKGROUND \
     -fn 'MononokiNerdFont-20'\
-    -i -l 10 | sed "s/ .*//")
+    -i -l 10 -p "Emoji:"| sed "s/ .*//")
 
 # Exit if none chosen.
 [ -z "$chosen" ] && exit

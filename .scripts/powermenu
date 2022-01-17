@@ -2,7 +2,7 @@
 
 . $HOME/.scripts/dmenu_color
 
-case "$(echo -e "Lock\nLogout\nRestart\nShutdown\nSuspend" | dmenu \
+case "$(echo "Lock\nLogout\nRestart\nShutdown\nSuspend" | dmenu \
     -nb $COLOR_BACKGROUND \
     -nf $COLOR_DEFAULT \
     -sf $COLOR_HIGHLIGHT \

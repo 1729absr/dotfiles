@@ -1,5 +1,5 @@
 #!/usr/bin/sh
 import -window root /tmp/screen.jpg
-[[ -f ~/.config/lock/lock.png ]] &&
+[ -f ~/.config/lock/lock.png ] &&
 	convert /tmp/screen.jpg -gaussian-blur 8x4 ~/.config/lock/lock.png -gravity center -composite /tmp/screen.png
 i3lock -e -f -i /tmp/screen.png

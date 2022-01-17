@@ -6,6 +6,7 @@ from libqtile.utils import guess_terminal
 import os
 import subprocess
 
+home = os.path.expanduser('~')
 mod = "mod4"
 terminal = "lxterminal"#guess_terminal()
 keys = [
@@ -75,7 +76,7 @@ keys = [
         ),
     Key([mod, "control"], "m",
         lazy.layout.shrink().when(layout='monadtall'),
-        lazy.layout.maximize().when("verticaltile"),
+        lazy.layout.maximize().when(layout='verticaltile'),
         desc="Grow window to the left"
         ),
     # Normalize all
@@ -94,6 +95,10 @@ keys = [
         desc="Toggle between split and unsplit sides of stack"
         ),
     Key([mod], "Return",
+        lazy.spawn(terminal),
+        desc="Launch terminal"
+        ),
+    Key(["mod1"], "space",
         lazy.spawn(terminal),
         desc="Launch terminal"
         ),
@@ -142,11 +147,11 @@ keys = [
 
     #Audio control
     Key([],"XF86AudioRaiseVolume",
-        lazy.spawn("change_volume +1%"),
+        lazy.spawn("change_volume +2%"),
         desc="Volume Up"
         ),
     Key([],"XF86AudioLowerVolume",
-        lazy.spawn("change_volume -1%"),
+        lazy.spawn("change_volume -2%"),
         desc="Volume Down"
         ),
     Key([],"XF86AudioMute",
@@ -166,11 +171,11 @@ keys = [
 
     #Brightness
     Key([], "XF86MonBrightnessUp",
-        lazy.spawn("brightnessctl -s set +150"),
+        lazy.spawn("brightnessctl -s set +1%"),
         desc="Brigtness Up"
         ),
     Key([], "XF86MonBrightnessDown",
-        lazy.spawn("brightnessctl -s set 150-"),
+        lazy.spawn("brightnessctl -s set 1%-"),
         desc="Brightness Down"
         ),
 
@@ -197,24 +202,24 @@ keys = [
         ),
     ## Brave
     Key([mod], "b",
-        lazy.spawn("/home/yoda/Activities/OSS/waterfox/waterfox-bin"),
+        lazy.spawn(home + "/Activities/OSS/waterfox/waterfox-bin"),
         desc="Launch waterfox"
         ),
 
     #configs (for xterm add -wf)
     ## qtile
     Key([mod], "F1",
-        lazy.spawn(terminal+" -e nvim /home/yoda/.config/qtile/config.py"),
+        lazy.spawn(terminal+" -e nvim "+home+"/.config/qtile/config.py"),
         desc="Qtile config"
         ),
     ### qtile autostart
     Key([mod], "F2",
-        lazy.spawn(terminal+" -e nvim /home/yoda/.config/qtile/autostart.sh"),
+        lazy.spawn(terminal+" -e nvim "+home+"/.config/qtile/autostart.sh"),
         desc="Qtile config"
         ),
     ## picom
     Key([mod], "F3",
-        lazy.spawn(terminal+" -e nvim /home/yoda/.config/picom/picom.conf"),
+        lazy.spawn(terminal+" -e nvim "+home+"/.config/picom/picom.conf"),
         desc="picom config"
         ),
     
@@ -249,7 +254,7 @@ keys = [
 
     #LibreOffice
     Key([mod], "o",
-        lazy.spawn("/home/yoda/Activities/OSS/LibreOffice.AppImage")
+        lazy.spawn(home+"/Activities/OSS/LibreOffice.AppImage")
         ),
 
     # Cool Features ## requires: "xclip"
@@ -338,6 +343,7 @@ screens = [
 		widget.WindowName(
             max_chars=60,
             fontsize=20,
+            mouse_callbacks={'Button2': lazy.window.kill()}
             ),
         widget.Cmus(
 			background='3d3f4b',
@@ -353,6 +359,10 @@ screens = [
         widget.TextBox(
             text = " ",
             padding = 0
+            ),
+        widget.Net(
+            format='{down} ↓↑ {up}',
+            foreground='#999999'
             ),
 #        "  ",
 #        widget.Sep(
@@ -391,7 +401,9 @@ screens = [
         widget.Clock(
 			padding=5,
             format=' %H:%M',
-            mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("dateandtime")}
+            mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("calendar c"),
+            'Button4': lambda: qtile.cmd_spawn("calendar p"),
+            'Button5': lambda: qtile.cmd_spawn("calendar n"),}
 			),
         widget.TextBox(
             text = "",
@@ -445,6 +457,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='pavucontrol'), # pavucontrol-gtk
     Match(wm_class='pinentry-gtk-2'), #Pass
     Match(wm_class='matplotlib'),
+    Match(wm_class='xbindkeys_show'),
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
 ],**layout_theme)
@@ -452,7 +465,6 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 
 def f1():
-    home = os.path.expanduser('~')
     os.system(home + '/.config/qtile/autostart.sh')
 hook.subscribe.startup_once(f1)
 

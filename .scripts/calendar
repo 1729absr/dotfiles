@@ -1,0 +1,34 @@
+#!/usr/bin/sh
+
+. "${HOME}/.cache/wal/colors.sh"
+send_notification() {
+	TODAY=$(date '+%-d')
+	HEAD=$(cal "$1" | head -n1)
+	case $HEAD in 
+	*$(date '+%-B %Y')*) BODY=$(cal "$1" | sed -z "s|$TODAY|<u><b><span foreground='$color3'>$TODAY</span></b></u>|1");;
+	*) BODY=$(cal "$1");;
+	esac
+	dunstify -r "43561" -u low -t 0 "" "$BODY\n^"
+}
+
+handle_action() {
+	echo "$DIFF" > "$TMP"
+	if [ "$DIFF" -ge 0 ]; then
+		send_notification "+$DIFF months"
+	else
+		send_notification "$((-DIFF)) months ago"
+	fi
+}
+
+TMP=${XDG_RUNTIME_DIR:-tmp}/"$UID"/calendar_notification_month
+touch "$TMP"
+
+DIFF=$(cat "$TMP")
+
+case $1 in
+	"c") DIFF=0;;
+	"n") DIFF=$((DIFF+1));;
+	"p") DIFF=$((DIFF-1));;
+esac
+
+handle_action
