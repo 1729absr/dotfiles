@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/python
 import random
 loi = ["LINUX", "NET-GATE", "Universities", "MS Thesis I", "MS Thesis II", "NLD", "Me Time"]
 ll = len(loi)

@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 volume=$(pactl get-sink-volume @DEFAULT_SINK@|awk '{print $5}'|sed 's/[^0-9]*//g')
 [ $(pactl get-sink-mute @DEFAULT_SINK@|awk '{print $2}') = yes ] && echo -n " 婢 0%" && exit
 
