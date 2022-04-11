@@ -5,10 +5,13 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 export PATH=$PATH:$HOME/.local/bin:$HOME/.scripts
-export TERM=xterm-256color
+export HISTCONTROL=ignoreboth
+#export TERM=xterm-256color
+export TERM='st'
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export EDITOR="nvim"
-export BROWSER="firefox"
-#export BROWSER="qutebrowser"
+export BROWSER="firefox"	#"qutebrowser"
+export TERMINAL="st"
 export READER="zathura"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export RANGER_LOAD_DEFAULT_RC=FALSE

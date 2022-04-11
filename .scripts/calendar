@@ -5,10 +5,10 @@ send_notification() {
 	TODAY=$(date '+%-d')
 	HEAD=$(cal "$1" | head -n1)
 	case $HEAD in 
-	*$(date '+%-B %Y')*) BODY=$(cal "$1" | sed -z "s|$TODAY|<u><b><span foreground='$color3'>$TODAY</span></b></u>|1");;
-	*) BODY=$(cal "$1");;
+	*$(date '+%-B %Y')*) BODY=$(cal "$1" | tail -n7 | sed -z "s|$TODAY|<u><b><span foreground='$color3'>$TODAY</span></b></u>|1");;
+	*) BODY=$(cal "$1" | tail -n7 );;
 	esac
-	dunstify -r "43561" -u low -t 0 "" "$BODY\n^"
+	dunstify -r "43561" -u low -t 0 "" "$HEAD\n$BODY\n^"
 }
 
 handle_action() {

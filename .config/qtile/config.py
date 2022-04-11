@@ -1,14 +1,14 @@
-from typing import List  # noqa: F401
+from typing import List
 from libqtile import qtile, bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
+#from libqtile.utils import guess_terminal
 import os
 import subprocess
 
 home = os.path.expanduser('~')
 mod = "mod4"
-terminal = "lxterminal"#guess_terminal()
+terminal = "st"
 keys = [
     # Switch between windows
     Key([mod], "h",
@@ -202,8 +202,8 @@ keys = [
         ),
     ## Brave
     Key([mod], "b",
-        lazy.spawn(home + "/Activities/OSS/waterfox/waterfox-bin"),
-        desc="Launch waterfox"
+        lazy.spawn("chromium --force-device-scale-factor=1.3"),
+        desc="Launch chromium"
         ),
 
     #configs (for xterm add -wf)
@@ -264,15 +264,25 @@ keys = [
         ),
 ]
 
-group_names = [("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'floating'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'})]
+#group_names = [("", {'layout': 'monadtall'}),
+#               ("", {'layout': 'max'}),
+#               ("", {'layout': 'monadtall'}),
+#               ("", {'layout': 'monadtall'}),
+#               ("", {'layout': 'monadtall'}),
+#               ("", {'layout': 'monadtall'}),
+#               ("", {'layout': 'floating'}),
+#               ("", {'layout': 'monadtall'}),
+#               ("", {'layout': 'monadtall'})]
+group_names = [("1", {'layout': 'monadtall'}),
+               ("2", {'layout': 'max'}),
+               ("3", {'layout': 'monadtall'}),
+               ("4", {'layout': 'monadtall'}),
+               ("5", {'layout': 'monadtall'}),
+               ("6", {'layout': 'monadtall'}),
+               ("7", {'layout': 'floating'}),
+               ("8", {'layout': 'monadtall'}),
+               ("9", {'layout': 'monadtall'})]
+
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
@@ -280,10 +290,10 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 	keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
 	keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name, switch_group=True))) # Send current window to another group
 
-layout_theme = {"border_width": 1,
+layout_theme = {"border_width": 4,
                 "margin": 8,
-                "border_focus": "#ffffff",
-                "border_normal": "#303232"
+                "border_focus": "#04A5AA",
+                "border_normal": "#43576E"#"#303232"
                 }
 
 layouts = [
@@ -313,7 +323,7 @@ screens = [
         top=bar.Bar(
             [
         widget.GroupBox(
-			fontsize=34,
+			#fontsize=34,
 			borderwidth=3,
 			rounded=False,
 			highlight_method="line",
@@ -343,7 +353,9 @@ screens = [
 		widget.WindowName(
             max_chars=60,
             fontsize=20,
-            mouse_callbacks={'Button2': lazy.window.kill()}
+            mouse_callbacks={'Button2': lazy.window.kill(),
+            'Button4':lazy.layout.up(),
+            'Button5':lazy.layout.down(),}
             ),
         widget.Cmus(
 			background='3d3f4b',
@@ -360,16 +372,6 @@ screens = [
             text = " ",
             padding = 0
             ),
-        widget.Net(
-            format='{down} ↓↑ {up}',
-            foreground='#999999'
-            ),
-#        "  ",
-#        widget.Sep(
-#			linewidth=1,
-#			padding=5,
-#			foreground="#575757",
-#			),
         widget.Systray(
 			icon_size=32,
 			),
