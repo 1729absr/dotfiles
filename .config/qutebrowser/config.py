@@ -116,8 +116,8 @@ draw.blood(c, {})
 
 # Bindings for normal mode
 config.bind('M', 'hint links spawn mpv {hint-url}')
-config.bind('Z', 'hint links spawn xterm -e yt-dlp -o "/home/yoda/Videos/%(title)s.%(ext)s" --add-metadata -ic {hint-url}')
-config.bind('A', 'hint links spawn xterm -e yt-dlp -o "/home/yoda/Music/%(title)s.%(ext)s" --add-metadata -xic {hint-url}')
+config.bind('Z', 'hint links spawn st -e yt-dlp -o "/home/yoda/Videos/%(title)s.%(ext)s" --add-metadata -ic {hint-url}')
+config.bind('A', 'hint links spawn st -e yt-dlp -o "/home/yoda/Music/%(title)s.%(ext)s" --add-metadata -xic {hint-url}')
 config.bind('t', 'set-cmd-text -s :open -t')
 config.bind('xb', 'config-cycle statusbar.show always never')
 config.bind('xt', 'config-cycle tabs.show always never')

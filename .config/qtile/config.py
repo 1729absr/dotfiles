@@ -300,7 +300,7 @@ layouts = [
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
     layout.Columns(**layout_theme),
-    layout.VerticalTile(**layout_theme),
+    layout.VerticalTile(border_width= 4, border_focus= "#04A5AA", border_normal= "#43576E"),
     layout.Floating(**layout_theme),
     # layout.Stack(num_stacks=2),
     # layout.Bsp(**layout_theme),
