@@ -299,11 +299,14 @@ layout_theme = {"border_width": 4,
 layouts = [
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
+    layout.Bsp(border_width= 4,
+                margin= 0,
+                border_focus= "#04A5AA",
+                border_normal= "#43576E"),
     layout.Columns(**layout_theme),
     layout.VerticalTile(border_width= 4, border_focus= "#04A5AA", border_normal= "#43576E"),
     layout.Floating(**layout_theme),
     # layout.Stack(num_stacks=2),
-    # layout.Bsp(**layout_theme),
     # layout.Matrix(),
     # layout.MonadWide(),
     # layout.RatioTile(),
@@ -460,6 +463,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='pinentry-gtk-2'), #Pass
     Match(wm_class='matplotlib'),
     Match(wm_class='xbindkeys_show'),
+    Match(wm_class='pix2tex_gui'),
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
 ],**layout_theme)
