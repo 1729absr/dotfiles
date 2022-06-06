@@ -1,5 +1,4 @@
-packadd! dracula
-colorscheme dracula
+"packadd! dracula
 set noshowmode
 set number relativenumber
 set mouse=a
@@ -13,7 +12,11 @@ Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 Plug 'vimwiki/vimwiki'
 Plug 'ap/vim-css-color'
+Plug 'sickill/vim-monokai'
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
+
+colorscheme PaperColor
 
 " VimWiki
 let g:vimwiki_list = [{'path': '$HOME/Activities/naonao/wiki',
@@ -51,7 +54,6 @@ inoremap <F7> <C-o>:IPythonCellExecuteCellJump<CR>
 " <F9> for running the code of c python latex
 autocmd FileType python nnoremap <buffer> <F9> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
 autocmd FileType c nnoremap <buffer> <F9> :w <bar> exec '!gcc -o a.out '.shellescape('%') '&& a.out' shellescape(@%, 1)<CR>
-autocmd FileType rust nnoremap <buffer> <F9> :w <bar> exec '!rustc -o a.out '.shellescape('%') '&& a.out' shellescape(@%, 1)<CR>
 autocmd FileType tex nnoremap <buffer> <F9> :w<CR>:exec '!pdflatex' shellescape(@%, 1)<CR>
 autocmd FileType html nnoremap <buffer> <F9> :w<CR>:exec '!firefox' shellescape(@%, 1)<CR>
 set laststatus=2
