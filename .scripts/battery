@@ -22,9 +22,10 @@ case "$status" in
 		    icon=""
 		elif [ $percent -gt 30 ]; then
 		    icon=""
+		    $(echo 0 > /tmp/bat.txt)
 		elif [ $percent = 30 ]; then
 		    icon=""
-		    $(dunstify -r 555555 -u normal "$percent % of the battery is remaining")
+		    [ $(cat /tmp/bat.txt) = 0 ] && $(dunstify -r 555555  -u normal "$percent % of the battery is remaining") && $(echo 1 > /tmp/bat.txt)
 		elif [ $percent -gt 20 ]; then
 		    icon=""
 		    $(echo 0 > /tmp/bat.txt)
@@ -36,7 +37,7 @@ case "$status" in
 		    $(echo 0 > /tmp/bat.txt)
 		elif [ $percent = 10 ]; then
 		    icon=""
-		    [ $(cat /tmp/bat.txt) = 0 ] && $(dunstify -r 555555  -u urgent "$percent % of the battery is remaining") && $(echo 1 > /tmp/bat.txt)
+		    [ $(cat /tmp/bat.txt) = 0 ] && $(dunstify -r 555555  -u critical "$percent % of the battery is remaining") && $(echo 1 > /tmp/bat.txt)
 		elif [ $percent -ge 0 ]; then
 		    icon=""
 		fi ;;
