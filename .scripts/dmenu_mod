@@ -1,12 +1,6 @@
 #!/bin/sh
 
-. $HOME/.scripts/dmenu_color
+. $HOME/.scripts/dmenu_base
 
 dmenu_run \
-	-nb $COLOR_BACKGROUND \
-	-nf $COLOR_DEFAULT \
-	-sf $COLOR_HIGHLIGHT \
-	-sb $SELECTED_BACKGROUND \
-	-fn 'MononokiNerdFont-20'\
-	-i -p \
-	"Search:" -l 10
+	$base " "

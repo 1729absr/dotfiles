@@ -1,0 +1,26 @@
+Blueman Adapters	blueman-adapters
+Blueman Manager	blueman-manager
+Btop	st -e btop
+Wallpaper Manager	wallpaper
+Chromium	chromium
+Cmake-GUI	cmake-gui
+File Manager	thunar
+Firefox	firefox
+GIMP	gimp
+Gparted	gparted
+Heimdall	heimdall-frontend
+Htop	st -e htop
+Kvantum Manager	kvantummanager
+LxAppearance	lxappearance
+LxRandr	lxrandr
+LxTerminal	lxterminal
+NM-Connection Editor	nm-connection-editor
+QT-Theme	qt5ct
+Ranger	st -e ranger
+Thunar Bulk Rename	thunar-bulk-rename
+Thunar Settings	thunar-settings
+Transmission	transmission-gtk
+UGet	uget-gtk
+Video4Linux	qv4l2
+Volume Control	pavucontrol
+Font Viewer (Dmenu)	dmenu-fontviewer

@@ -1,15 +1,8 @@
 #!/bin/sh
 
-. $HOME/.scripts/dmenu_color
+. $HOME/.scripts/dmenu_base
 
-case "$(echo "Lock\nLogout\nRestart\nShutdown\nSuspend" | dmenu \
-    -nb $COLOR_BACKGROUND \
-    -nf $COLOR_DEFAULT \
-    -sf $COLOR_HIGHLIGHT \
-    -sb $SELECTED_BACKGROUND \
-    -fn 'MononokiNerdFont-20'\
-    -b -i -p \
-    "Power:" -l 5)" in
+case "$(echo "Lock\nLogout\nRestart\nShutdown\nSuspend" | dmenu -b $base "Power:")" in
         Lock) exec lock;;
         Logout) kill -9 -1;;
         Restart) exec systemctl reboot;;
