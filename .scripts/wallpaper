@@ -1,20 +1,63 @@
 #!/bin/sh
 
-WP=$HOME/.local/share/wallpaper
-rm -r "$HOME/.cache/wal/schemes/"
+. $HOME/.scripts/dmenu_color
 
-case $1 in
-	-u)
+WP=$HOME/.local/share/wallpaper
+
+if [ -z $1 ]; then
+	rm -r "$HOME/.cache/wal/schemes/"
+	set_wal_unsplash() {\
 		wget -q -O "$WP" https://source.unsplash.com/1920x1080/?city,night,ocean,space,fire,hell
 		[ -f "${WP}" ] &&\
 			wal -n -i "$WP" &&\
 			xwallpaper --zoom $(cat "${HOME}/.cache/wal/wal") &&\
 			$(python "${HOME}/.config/wal/lxterminal") &&\
 			notify-send -i emblem-photos "Wallpaper changed (source: unsplash.com)" && exit
-esac
+	}
+	
+	
+	copy_fav() { \
+		fav_dir=$HOME/Pictures/Wallpapers/selected/
+		[ -f "${WP}" ] &&\
+			if [ -d $fav_dir ]; then
+				fav_name=selected_$(date '+%Y-%m-%d_%H-%M-%S')".jpg" &&\
+				cp $WP $fav_dir/$fav_name &&\
+				notify-send "Wallpaper copied to Favourites"&&\
+				exit\
+			else
+				notify-send "Directory for selected wallpapers $fav_dir does not exist" && exit
+			fi
+		notify-send "Wallpaper file at $WP does not exist" && exit
+	}
+	
+	cu="Change Wallpaper - unsplash as source"
+	cl="Set wallpaper from a local file"
+	co="Copy current wallpaper to favourites"
+	chosen=$(printf "$cu\n$cl\n$co"|dmenu \
+		-nb $COLOR_BACKGROUND \
+		-nf $COLOR_DEFAULT \
+		-sf $COLOR_HIGHLIGHT \
+		-sb $SELECTED_BACKGROUND \
+		-fn 'MononokiNerdFont-18'\
+		-i -l 10 -p "Font Viewer:")
+	
+	# Exit if none chosen.
+	[ -z "$chosen" ] && exit
+	
+	case $chosen in
+		$cl)
+			$TERMINAL -e ranger $HOME/Pictures/Wallpapers;;
+		$cu)
+			set_wal_unsplash;;
+		$co)
+			copy_fav;;
+	esac
 
-cp $1 $WP &&\
-	wal -n -i $WP &&\
-	xwallpaper --zoom $(cat "${HOME}/.cache/wal/wal") &&\
-	$(python "${HOME}/.config/wal/lxterminal") &&\
-	notify-send -i emblem-photos "Wallpaper changed (source: local file)"
+else
+	rm -r "$HOME/.cache/wal/schemes/"
+	cp $1 $WP &&\
+		wal -n -i $WP &&\
+		xwallpaper --zoom $(cat "${HOME}/.cache/wal/wal") &&\
+		$(python "${HOME}/.config/wal/lxterminal") &&\
+		notify-send -i emblem-photos "Wallpaper changed (source: local file)"
+fi
