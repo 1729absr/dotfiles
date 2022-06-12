@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. $HOME/.scripts/dmenu_color
+
+menu_file=~/.local/share/dmenu/menu_list
+# Get user selection via dmenu from emoji file.
+chosen=$(awk -F "\t" '{print $1}' $menu_file | dmenu \
+    -nb $COLOR_BACKGROUND \
+    -nf $COLOR_DEFAULT \
+    -sf $COLOR_HIGHLIGHT \
+    -sb $SELECTED_BACKGROUND \
+    -fn 'MononokiNerdFont-18'\
+    -i -l 10 -p " ")
+
+# Exit if none chosen.
+[ -z "$chosen" ] && exit
+
+to_run=$(grep "$chosen" $menu_file| sed "s/.*\t//g")
+$to_run

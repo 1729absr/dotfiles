@@ -236,8 +236,13 @@ keys = [
         ),
 
 
-    # dmenu
+    # dmenu desktop files
     Key(["mod1"], "Return",
+        lazy.spawn("menu"),
+        desc="menu"
+        ),
+    # dmenu
+    Key(["mod1"], "r",
         lazy.spawn("dmenu_mod"),
         desc="dmenu"
         ),
@@ -258,10 +263,6 @@ keys = [
         ),
 
     # Cool Features ## requires: "xclip"
-    Key([mod, "mod1"], "m",
-        lazy.spawn("mlink"),
-        desc="Play the copied link in mpv"
-        ),
 ]
 
 #group_names = [("", {'layout': 'monadtall'}),
@@ -325,6 +326,12 @@ screens = [
     Screen(
         top=bar.Bar(
             [
+		widget.TextBox(
+            text = "  ",
+            padding = 0,
+			foreground="#589cc5",
+            mouse_callbacks={'Button1': lazy.spawn("menu"),}
+            ),
         widget.GroupBox(
 			#fontsize=34,
 			borderwidth=3,
@@ -460,10 +467,10 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='lxappearance'),
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(wm_class='pavucontrol'), # pavucontrol-gtk
-    Match(wm_class='pinentry-gtk-2'), #Pass
+    Match(wm_class='pinentry-gtk-2'), # Pass
     Match(wm_class='matplotlib'),
     Match(wm_class='xbindkeys_show'),
-    Match(wm_class='pix2tex_gui'),
+    Match(wm_class='display'),  # ImageMagick Display
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
 ],**layout_theme)

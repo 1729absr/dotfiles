@@ -1,13 +1,13 @@
 #!/bin/sh
 
-#COLOR_BACKGROUND="#151515"
-#COLOR_DEFAULT="#aaaaaa"
-#COLOR_HIGHLIGHT="#589cc5"
-#SELECTED_BACKGROUND="#1a1a1a"
+COLOR_BACKGROUND="#151515"
+COLOR_DEFAULT="#aaaaaa"
+COLOR_HIGHLIGHT="#589cc5"
+SELECTED_BACKGROUND="#1a1a1a"
 
 ## If wanna use the pywal color scheme comment it out
-. "${HOME}/.cache/wal/colors.sh"
-COLOR_BACKGROUND=$color0
-COLOR_DEFAULT=$color15
-COLOR_HIGHLIGHT=$color15
-SELECTED_BACKGROUND=$color2
+#. "${HOME}/.cache/wal/colors.sh"
+#COLOR_BACKGROUND=$color0
+#COLOR_DEFAULT=$color15
+#COLOR_HIGHLIGHT=$color15
+#SELECTED_BACKGROUND=$color2

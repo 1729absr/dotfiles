@@ -13,8 +13,8 @@ case $1 in
 			notify-send -i emblem-photos "Wallpaper changed (source: unsplash.com)" && exit
 esac
 
-#cp $1 $WP &&\
-#	wal -n -i $WP &&\
-#	xwallpaper --zoom $(cat "${HOME}/.cache/wal/wal") &&\
-#	$(python "${HOME}/.config/wal/lxterminal") &&\
-#	notify-send -i emblem-photos "Wallpaper changed (source: local file)"
+cp $1 $WP &&\
+	wal -n -i $WP &&\
+	xwallpaper --zoom $(cat "${HOME}/.cache/wal/wal") &&\
+	$(python "${HOME}/.config/wal/lxterminal") &&\
+	notify-send -i emblem-photos "Wallpaper changed (source: local file)"

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+. $HOME/.scripts/dmenu_color
+
+chosen=$(fc-list | awk -F ":" '{print $1}'|dmenu \
+	-nb $COLOR_BACKGROUND \
+	-nf $COLOR_DEFAULT \
+	-sf $COLOR_HIGHLIGHT \
+	-sb $SELECTED_BACKGROUND \
+	-fn 'MononokiNerdFont-20'\
+	-i -l 10 -p "Font Viewer:")
+
+# Exit if none chosen.
+[ -z "$chosen" ] && exit
+
+display "$chosen"
