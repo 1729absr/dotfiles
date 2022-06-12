@@ -1,0 +1,20 @@
+#!/bin/sh
+
+WP=$HOME/.local/share/wallpaper
+rm -r "$HOME/.cache/wal/schemes/"
+
+case $1 in
+	-u)
+		wget -q -O "$WP" https://source.unsplash.com/1920x1080/?city,night,ocean,space,fire,hell
+		[ -f "${WP}" ] &&\
+			wal -n -i "$WP" &&\
+			xwallpaper --zoom $(cat "${HOME}/.cache/wal/wal") &&\
+			$(python "${HOME}/.config/wal/lxterminal") &&\
+			notify-send -i emblem-photos "Wallpaper changed (source: unsplash.com)" && exit
+esac
+
+#cp $1 $WP &&\
+#	wal -n -i $WP &&\
+#	xwallpaper --zoom $(cat "${HOME}/.cache/wal/wal") &&\
+#	$(python "${HOME}/.config/wal/lxterminal") &&\
+#	notify-send -i emblem-photos "Wallpaper changed (source: local file)"
