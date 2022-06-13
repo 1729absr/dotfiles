@@ -10,6 +10,10 @@ WP=$HOME/.local/share/wallpaper
 
 set_wal_unsplash() {\
 	genre=$(printf "city\nspace\nnight\nocean\nfire\nhell"|dmenu $base "genre: ")
+
+	# Exit if none chosen.
+	[ -z "$genre" ] && exit
+
 	wget -q -O "$WP" https://source.unsplash.com/1920x1080/?$genre
 	[ -f "${WP}" ] &&\
 		rm -r "$HOME/.cache/wal/schemes/" &&\
@@ -32,6 +36,10 @@ set_wal_bing(){
 	# The idx parameter determines where to start from. 0 is the current day,
 	# 1 the previous day, etc.
 	mkt_param=$(printf "en-US\nzh-CN\nja-JP\nen-AU\nen-UK\nde-DE\nen-NZ\nen-CA"|dmenu $base "mkt: ")
+
+	# Exit if none chosen.
+	[ -z "$mkt_param" ] && exit
+
 	xmlURL="http://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1&mkt=$mkt_param"
 	
 	# The desired Bing picture resolution to download
