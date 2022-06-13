@@ -2,18 +2,70 @@
 
 . $HOME/.scripts/dmenu_base
 
+# Thanks to Guangzhi for the helpful scripts provided in the post
+# "Automatically get a random wallpaper from Unsplash or bing’s-photo-of-the-day using bash scripting"
+# https://numbersmithy.com/automatically-get-a-random-wallpaper-from-unsplash-or-bings-photo-of-the-day-using-bash-scripting/
+
 WP=$HOME/.local/share/wallpaper
 
 set_wal_unsplash() {\
-	wget -q -O "$WP" https://source.unsplash.com/1920x1080/?city,night,ocean,space,fire,hell,linux
-	rm -r "$HOME/.cache/wal/schemes/"
+	genre=$(printf "city\nspace\nnight\nocean\nfire\nhell"|dmenu $base "genre: ")
+	wget -q -O "$WP" https://source.unsplash.com/1920x1080/?$genre
 	[ -f "${WP}" ] &&\
+		rm -r "$HOME/.cache/wal/schemes/" &&\
 		xwallpaper --zoom $WP &&\
 		notify-send -i emblem-photos "Wallpaper changed (source: unsplash.com)" &&\
 		ifinstalled wal && wal -n -i "$WP" &&\
 		$(python "${HOME}/.config/wal/lxterminal") && exit
 	}
 
+set_wal_bing(){
+	bing="www.bing.com"
+	
+	# $xmlURL is needed to get the xml data from which
+	# the relative URL for the Bing pic of the day is extracted
+	#
+	# The mkt parameter determines which Bing market you would like to
+	# obtain your images from.
+	# Valid values are: en-US, zh-CN, ja-JP, en-AU, en-UK, de-DE, en-NZ, en-CA or opted out.
+	#
+	# The idx parameter determines where to start from. 0 is the current day,
+	# 1 the previous day, etc.
+	mkt_param=$(printf "en-US\nzh-CN\nja-JP\nen-AU\nen-UK\nde-DE\nen-NZ\nen-CA"|dmenu $base "mkt: ")
+	xmlURL="http://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1&mkt=$mkt_param"
+	
+	# The desired Bing picture resolution to download
+	# Valid options: "_1024x768" "_1280x720" "_1366x768" "_1920x1200"
+	desiredPicRes="_1920x1080"
+	
+	# The file extension for the Bing pic
+	picExt=".jpg"
+	
+	# Extract the relative URL of the Bing pic of the day from
+	# the XML data retrieved from xmlURL, form the fully qualified
+	# URL for the pic of the day, and store it in $picURL
+	
+	# Form the URL for the desired pic resolution
+	desiredPicURL=$bing$(curl -s $xmlURL | grep -oP "(?<=<urlBase>)(.*?)(?=</urlBase>)")$desiredPicRes$picExt
+	
+	# Form the URL for the default pic resolution
+	defaultPicURL=$bing$(curl -s $xmlURL | grep -oP "(?<=<url>)(.*?)(?=</url>)")
+	
+	# Attempt to download the desired image resolution. If it doesn't
+	# exist then download the default image resolution
+	if wget --quiet --spider "$desiredPicURL"; then
+	    wget -q -O "$WP" "$desiredPicURL"
+	else
+	    wget -q -O "$WP" "$defaultPicURL"
+	fi
+	
+	[ -f "${WP}" ] &&\
+		rm -r "$HOME/.cache/wal/schemes/" &&\
+		xwallpaper --zoom $WP &&\
+		notify-send -i emblem-photos "Wallpaper changed (source: bing.com)" &&\
+		ifinstalled wal && wal -n -i "$WP" &&\
+		$(python "${HOME}/.config/wal/lxterminal") && exit
+}
 
 copy_fav() { \
 	fav_dir=$HOME/Pictures/Wallpapers/selected/
@@ -33,7 +85,8 @@ if [ -z $1 ]; then
 	co="Copy current wallpaper to favourites"
 	cl="Set wallpaper from a local file"
 	cu="Change Wallpaper - unsplash as source"
-	chosen=$(printf "$co\n$cl\n$cu"|dmenu $base " ")
+	cb="Change Wallpaper - bing as source"
+	chosen=$(printf "$co\n$cl\n$cu\n$cb"|dmenu $base " ")
 	
 	# Exit if none chosen.
 	[ -z "$chosen" ] && exit
@@ -48,6 +101,8 @@ if [ -z $1 ]; then
 			sxiv -tb -r $local_dir;;
 		$cu)
 			set_wal_unsplash;;
+		$cb)
+			set_wal_bing;;
 	esac
 
 else
