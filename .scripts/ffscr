@@ -1,3 +1,10 @@
-#!/bin/sh
-time=cap_$(date "+%Y-%m-%d_%H-%M-%S")
-ffmpeg -f x11grab -i :0.0 -f pulse -i default -c:v libx264 -c:a flac $HOME/Videos/ScreenCast/$time.mkv
+#!/bin/bash
+cap_time=cap_$(date "+%Y-%m-%d_%H-%M-%S")
+cap_dir="$HOME/Videos/ScreenCast/"
+
+if [ $1 = start ]; then
+	printf " " &&\
+	ffmpeg -f x11grab -i :0.0 -f pulse -i default -c:v libx264 -c:a flac $cap_dir/$cap_time.mkv
+elif [ $1 = stop ]; then
+	killall ffmpeg && exit
+fi

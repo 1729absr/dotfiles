@@ -2,7 +2,7 @@
 
 . $HOME/.scripts/dmenu_base
 
-case "$(echo "Lock\nLogout\nRestart\nShutdown\nSuspend" | dmenu -b $base "Power:")" in
+case "$(echo "Lock\nLogout\nRestart\nShutdown\nSuspend" | dmenu -b $base " ")" in
         Lock) exec lock;;
         Logout) kill -9 -1;;
         Restart) exec systemctl reboot;;

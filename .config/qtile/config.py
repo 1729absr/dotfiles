@@ -237,12 +237,12 @@ keys = [
 
 
     # dmenu desktop files
-    Key(["mod1"], "Return",
+    Key([mod], "a",
         lazy.spawn("menu"),
         desc="menu"
         ),
     # dmenu
-    Key(["mod1"], "r",
+    Key(["mod1"], "Return",
         lazy.spawn("dmenu_mod"),
         desc="dmenu"
         ),

@@ -4,32 +4,32 @@
 
 WP=$HOME/.local/share/wallpaper
 
-if [ -z $1 ]; then
-	set_wal_unsplash() {\
-		wget -q -O "$WP" https://source.unsplash.com/1920x1080/?city,night,ocean,space,fire,hell,linux
-		rm -r "$HOME/.cache/wal/schemes/"
-		[ -f "${WP}" ] &&\
-			xwallpaper --zoom $WP &&\
-			notify-send -i emblem-photos "Wallpaper changed (source: unsplash.com)" &&\
-			ifinstalled wal && wal -n -i "$WP" &&\
-			$(python "${HOME}/.config/wal/lxterminal") && exit
-		}
-	
-	
-	copy_fav() { \
-		fav_dir=$HOME/Pictures/Wallpapers/selected/
-		[ -f "${WP}" ] &&\
-			if [ -d $fav_dir ]; then
-				fav_name=selected_$(date '+%Y-%m-%d_%H-%M-%S')".jpg" &&\
-				cp $WP $fav_dir/$fav_name &&\
-				notify-send "Wallpaper copied to Favourites"&&\
-				exit
-			else
-				notify-send "Directory for selected wallpapers $fav_dir does not exist" && exit
-			fi
-		notify-send "Wallpaper file at $WP does not exist" && exit
+set_wal_unsplash() {\
+	wget -q -O "$WP" https://source.unsplash.com/1920x1080/?city,night,ocean,space,fire,hell,linux
+	rm -r "$HOME/.cache/wal/schemes/"
+	[ -f "${WP}" ] &&\
+		xwallpaper --zoom $WP &&\
+		notify-send -i emblem-photos "Wallpaper changed (source: unsplash.com)" &&\
+		ifinstalled wal && wal -n -i "$WP" &&\
+		$(python "${HOME}/.config/wal/lxterminal") && exit
 	}
-	
+
+
+copy_fav() { \
+	fav_dir=$HOME/Pictures/Wallpapers/selected/
+	[ -f "${WP}" ] &&\
+		if [ -d $fav_dir ]; then
+			fav_name=selected_$(date '+%Y-%m-%d_%H-%M-%S')".jpg" &&\
+			cp $WP $fav_dir/$fav_name &&\
+			notify-send "Wallpaper copied to Favourites"&&\
+			exit
+		else
+			notify-send "Directory for selected wallpapers $fav_dir does not exist" && exit
+		fi
+	notify-send "Wallpaper file at $WP does not exist" && exit
+}
+
+if [ -z $1 ]; then
 	co="Copy current wallpaper to favourites"
 	cl="Set wallpaper from a local file"
 	cu="Change Wallpaper - unsplash as source"
@@ -42,7 +42,10 @@ if [ -z $1 ]; then
 		$co)
 			copy_fav;;
 		$cl)
-			$TERMINAL -e ranger $HOME/Pictures/Wallpapers;;
+			local_dir=$(printf "$HOME/Pictures/Wallpapers/selected/\n$HOME/Pictures/Wallpapers/\n$HOME/Pictures/Wallpapers/elementary/"|dmenu\
+				$base "Select one or enter Path:")
+			[ -z "$local_dir" ] && exit ||\
+			sxiv -tb -r $local_dir;;
 		$cu)
 			set_wal_unsplash;;
 	esac

@@ -1,0 +1,49 @@
+#!/bin/sh
+
+. $HOME/.scripts/dmenu_base
+
+docs_file="$HOME/.local/share/dmenu/papers.list"
+
+add(){
+	docs_dir=$(cd "$(dirname "$1")"; pwd)
+	docs_list="$(find $docs_dir -name '*.pdf')"
+	# Changing the IFS Variable, So that it will split
+	# line by line instead of words separated by spaces
+	(IFS='
+	'
+	for doc in $docs_list; do 
+		info=$(exiftool -Title -Author "$doc"|sed 's/Title                           :/\t/g; s/Author                          :/\t/g')
+		echo "$info"
+		info_str_test=$(echo $info|sed 's/ //g')
+		[ -n $info_str_test ] && echo $doc$info >> $docs_file
+	done)
+}
+
+clean(){
+	rm $docs_file
+}
+
+open(){
+	chosen=$(cat $docs_file | awk -F '  ' '{print $2 " by " $3}' | dmenu $base " " -l 10)
+	
+	# Exit if none chosen.
+	[ -z "$chosen" ] && exit
+	
+	to_find=$(echo "$chosen" | awk -F " by " '{print $1}')
+	to_open=$(grep "$to_find" $docs_file | awk -F '  ' '{print $1}')
+	
+	zathura "$to_open"
+}
+
+if [ -z $1 ]; then
+	open
+else
+	case $1 in
+		--add)
+			add $2 && exit;;
+		--clean)
+			clean && exit;;
+	esac
+fi
+
+
