@@ -7,14 +7,14 @@ docs_file="$HOME/.local/share/dmenu/papers.list"
 add(){
 	docs_dir=$(cd "$1"; pwd)
 	echo $docs_dir
-	docs_list="$(find "$docs_dir" -name '*.pdf')"
+	docs_list="$(find $docs_dir -name '*.pdf')"
 	# Changing the IFS Variable, So that it will split
 	# line by line instead of words separated by spaces
 	(IFS='
 	'
 	for doc in $docs_list; do 
-		info=$(pdfinfo $doc | grep -E "Author|Title" | sed "s/  //g; s/Title:/\t/g; s/Author:/: /")
-		printf "$info"
+		info=$(exiftool -Title -Author "$doc"|sed 's/Title                           :/\t/g; s/Author                          :/\t/g')
+		echo "$info"
 		info_str_test=$(echo $info|sed 's/ //g')
 		[ -n $info_str_test ] && echo $doc$info >> $docs_file
 	done)
@@ -25,12 +25,13 @@ clean(){
 }
 
 open(){
-	chosen=$(cat $docs_file | awk -F '  ' '{print $2}' | sort | dmenu $base " " -l 10)
+	chosen=$(cat $docs_file | awk -F '  ' '{print $2 " by " $3}' | sort | dmenu $base " " -l 10)
 	
 	# Exit if none chosen.
 	[ -z "$chosen" ] && exit
 	
-	to_open=$(grep "$chosen" $docs_file | awk -F '  ' '{print $1}')
+	to_find=$(echo "$chosen" | awk -F " by " '{print $1}')
+	to_open=$(grep "$to_find" $docs_file | awk -F '  ' '{print $1}')
 	
 	zathura "$to_open"
 }
