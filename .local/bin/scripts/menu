@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. $HOME/.scripts/dmenu_base
+. dmenu_base
 
 menu_file=~/.local/share/dmenu/menu_list
 # Get user selection via dmenu from emoji file.

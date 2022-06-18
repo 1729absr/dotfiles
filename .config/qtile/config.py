@@ -321,6 +321,7 @@ widget_defaults = dict(
     fontsize=24,
     padding=4,
 )
+
 extension_defaults = widget_defaults.copy()
 screens = [
     Screen(

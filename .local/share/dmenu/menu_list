@@ -1,11 +1,11 @@
 Blueman Adapters	blueman-adapters
 Blueman Manager	blueman-manager
 Btop	st -e btop
-Wallpaper Manager	wallpaper
 Chromium	chromium
 Cmake-GUI	cmake-gui
 File Manager	thunar
 Firefox	firefox
+Font Viewer (Dmenu)	dmenu-fontviewer
 GIMP	gimp
 Gparted	gparted
 Htop	st -e htop
@@ -16,10 +16,13 @@ LxTerminal	lxterminal
 NM-Connection Editor	nm-connection-editor
 QT-Theme	qt5ct
 Ranger	st -e ranger
+Research Paper Organiser	rporg
 Thunar Bulk Rename	thunar-bulk-rename
 Thunar Settings	thunar-settings
 Transmission	transmission-gtk
 UGet	uget-gtk
+Video Editor (OpenShot)	openshot-qt
 Video4Linux	qv4l2
 Volume Control	pavucontrol
-Font Viewer (Dmenu)	dmenu-fontviewer
+Wallpaper Manager	wallpaper
+Zman (Man pages in Zathura)	zman

@@ -1,0 +1,4 @@
+#!/bin/sh
+. $XDG_CONFIG_HOME/user-dirs.dirs
+time="scrot_"$(date '+%Y-%m-%d_%H-%M-%S')".png"
+import -window root $XDG_PICTURES_DIR/screenshots/$time

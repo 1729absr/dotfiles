@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. $HOME/.scripts/dmenu_base
+. dmenu_base
 
 case "$(echo "Lock\nLogout\nRestart\nShutdown\nSuspend" | dmenu -b $base " ")" in
         Lock) exec lock;;

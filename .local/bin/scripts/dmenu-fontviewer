@@ -1,10 +1,10 @@
 #!/bin/sh
 
-. $HOME/.scripts/dmenu_base
+. dmenu_base
 
 chosen=$(fc-list | awk -F ":" '{print $1}'|dmenu $base "Font Viewer:")
 
 # Exit if none chosen.
 [ -z "$chosen" ] && exit
 
-display "$chosen"
+display "$chosen" && dmenu-fontviewer && exit

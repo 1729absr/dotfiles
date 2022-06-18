@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. $HOME/.scripts/dmenu_base
+. dmenu_base
 
 dmenu_run \
 	$base " "

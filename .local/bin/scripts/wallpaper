@@ -1,15 +1,23 @@
 #!/bin/sh
 
-. $HOME/.scripts/dmenu_base
+. dmenu_base
 
-# Thanks to Guangzhi for the helpful scripts provided in the post
+# Thanks to Guangzhi for the helpful scripts provided in the post:
 # "Automatically get a random wallpaper from Unsplash or bing’s-photo-of-the-day using bash scripting"
 # https://numbersmithy.com/automatically-get-a-random-wallpaper-from-unsplash-or-bings-photo-of-the-day-using-bash-scripting/
 
 WP=$HOME/.local/share/wallpaper
+. $XDG_CONFIG_HOME/user-dirs.dirs
 
-set_wal_unsplash() {\
-	genre=$(printf "..\ncity\nspace\nnight\nocean\nfire\nhell"|dmenu $base "genre: ")
+default(){
+	xwallpaper --zoom $WP &&\
+	notify-send -i emblem-photos "Wallpaper changed (source: $1)" &&\
+	ifinstalled wal && $(rm -r "$HOME/.cache/wal/schemes/")\
+	wal -n -i $WP && $(python "${HOME}/.config/wal/lxterminal")
+}
+
+set_wal_unsplash() {
+	genre=$(echo "..\ncity\nspace\nnight\nocean\nfire\nhell"|dmenu $base "genre: ")
 
 	# Exit if none chosen.
 	[ -z "$genre" ] && exit
@@ -18,15 +26,15 @@ set_wal_unsplash() {\
 	then
 		wallpaper && exit
 	else
-		wget -q -O "$WP" https://source.unsplash.com/1920x1080/?$genre
+		if wget --quiet --spider https://source.unsplash.com/1920x1080/?"$genre"; then
+			wget -q -O "$WP" https://source.unsplash.com/1920x1080/?"$genre"
+		else
+			notify-send "No genre named $genre exists" && set_wal_unsplash && exit
+		fi
 		[ -f "${WP}" ] &&\
-			$(rm -r "$HOME/.cache/wal/schemes/")\
-			xwallpaper --zoom $WP &&\
-			notify-send -i emblem-photos "Wallpaper changed (source: unsplash.com)" &&\
-			ifinstalled wal && $(rm -r "$HOME/.cache/wal/schemes/")\
-			wal -n -i $WP && $(python "${HOME}/.config/wal/lxterminal") && set_wal_unsplash && exit
+			default "unsplash.com" && sleep 3 && set_wal_unsplash && exit
 	fi
-	}
+}
 
 set_wal_bing(){
 	bing="www.bing.com"
@@ -40,7 +48,7 @@ set_wal_bing(){
 	#
 	# The idx parameter determines where to start from. 0 is the current day,
 	# 1 the previous day, etc.
-	mkt_param=$(printf "..\nen-US\nzh-CN\nja-JP\nen-AU\nen-UK\nde-DE\nen-NZ\nen-CA"|dmenu $base "mkt: ")
+	mkt_param=$(echo "..\nen-US\nzh-CN\nja-JP\nen-AU\nen-UK\nde-DE\nen-NZ\nen-CA"|dmenu $base "mkt: ")
 
 	# Exit if none chosen.
 	[ -z "$mkt_param" ] && exit
@@ -77,16 +85,12 @@ set_wal_bing(){
 		fi
 		
 		[ -f "${WP}" ] &&\
-			$(rm -r "$HOME/.cache/wal/schemes/")\
-			xwallpaper --zoom $WP &&\
-			notify-send -i emblem-photos "Wallpaper changed (source: bing.com)" &&\
-			ifinstalled wal && $(rm -r "$HOME/.cache/wal/schemes/")\
-			wal -n -i $WP && $(python "${HOME}/.config/wal/lxterminal") && set_wal_bing && exit
+			default "bing.com" && sleep 3 && set_wal_bing && exit
 	fi
 }
 
 copy_fav() { \
-	fav_dir=$HOME/Pictures/Wallpapers/selected/
+	fav_dir=$XDG_PICTURES_DIR/wallpapers/selected/
 	[ -f "${WP}" ] &&\
 		if [ -d $fav_dir ]; then
 			fav_name=selected_$(date '+%Y-%m-%d_%H-%M-%S')".jpg" &&\
@@ -114,7 +118,7 @@ if [ -z $1 ]; then
 		$co)
 			copy_fav;;
 		$cl)
-			local_dir=$(printf "..\n$HOME/Pictures/Wallpapers/selected/\n$HOME/Pictures/Wallpapers/\n$HOME/Pictures/Wallpapers/elementary/"|dmenu\
+			local_dir=$(echo "..\n$XDG_PICTURES_DIR/wallpapers/selected/\n$XDG_PICTURES_DIR/wallpapers/\n$XDG_PICTURES_DIR/wallpapers/elementary/"|dmenu\
 				$base "Select one or enter Path:")
 			[ -z "$local_dir" ] && exit
 			
@@ -133,8 +137,5 @@ if [ -z $1 ]; then
 
 else
 	cp $1 $WP &&\
-		xwallpaper --zoom $WP &&\
-		notify-send -i emblem-photos "Wallpaper changed (source: local file)" &&\
-		ifinstalled wal && $(rm -r "$HOME/.cache/wal/schemes/")\
-		wal -n -i $WP && $(python "${HOME}/.config/wal/lxterminal") && exit
+		default "local file" && exit
 fi

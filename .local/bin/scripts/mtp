@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. $HOME/.scripts/dmenu_color
+. dmenu_base
 alias dmenu='dmenu -nb $COLOR_BACKGROUND \
 	-nf $COLOR_DEFAULT \
 	-sf $COLOR_HIGHLIGHT \

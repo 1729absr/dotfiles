@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =6
-let g:netrw_dirhist_6='/var/log/journal/9180d9b515074ef6ad99c0d7cbf9960e'
-let g:netrw_dirhist_5='/var/log'
-let g:netrw_dirhist_4='/home/yoda/.config/zathura'
-let g:netrw_dirhist_3='/home/yoda/.config/qtile'
-let g:netrw_dirhist_2='/usr/share/X11'
-let g:netrw_dirhist_1='/var/log/journal'

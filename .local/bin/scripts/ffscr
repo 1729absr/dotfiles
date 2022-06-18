@@ -1,0 +1,17 @@
+#!/bin/sh
+
+. $XDG_CONFIG_HOME/user-dirs.dirs
+cap_time=cap_$(date "+%Y-%m-%d_%H-%M-%S")
+cap_dir="$HOME/$XDG_VIDEOS_DIR/screencast/"
+
+if [ $1 = "start" ]
+then
+	printf " " &&\
+	ffmpeg -f x11grab -i :0.0 -f pulse -i default -c:v libx264 -c:a flac $cap_dir/$cap_time.mkv
+elif [ $1 = "stop" ]
+then
+	PID=$(ps -ef | grep "/bin/sh $XDG_SCRIPTS_DIR/ffscr"|awk '{print $2}'|head -n1)
+	kill -TERM -$PID
+else
+	exit &
+fi
