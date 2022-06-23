@@ -1,7 +1,7 @@
 "------------------------------------------------------------------------
 " Using vim-plug to call the plugins
 "------------------------------------------------------------------------
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'vimwiki/vimwiki'
@@ -29,8 +29,8 @@ let g:lightline = {
 "------------------------------------------------------------------------
 " VimWiki
 "------------------------------------------------------------------------
-let g:vimwiki_list = [{'path': '$HOME/Activities/naonao/wiki',
-			\ 'template_path': '/home/yoda/Activities/naonao/templates/',
+let g:vimwiki_list = [{'path': '$HOME/main/naonao/wiki',
+			\ 'template_path': '/home/yoda/main/naonao/templates/',
 			\ 'template_ext': '.html',
 			\ 'template_default': 'default',
 			\ 'css_name': 'style.css'}]

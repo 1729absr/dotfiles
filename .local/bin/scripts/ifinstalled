@@ -1,5 +1,25 @@
 #!/bin/sh
 
+while getopts ":q:" opt; do
+	case $opt in
+		q)
+			for x in "$@"; do
+				if ! which "$x" >/dev/null 2>&1 && ! pacman -Qq "$x" >/dev/null 2>&1; then
+					exit 1 ;
+				fi
+			done
+			;;
+		\?)
+			echo "Invalid option: -$OPTARG" >&2
+			exit 1
+			;;
+		:)
+			echo "Option -$OPTARG requires an argument." >&2
+			exit 1
+			;;
+	esac
+done
+
 for x in "$@"; do
 	if ! which "$x" >/dev/null 2>&1 && ! pacman -Qq "$x" >/dev/null 2>&1; then
  		notify-send "📦 $x" "must be installed for this function." && exit 1 ;

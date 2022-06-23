@@ -25,7 +25,7 @@ clean(){
 }
 
 open(){
-	chosen=$(cat $docs_file | awk -F '  ' '{print $2}' | sort | dmenu $base " " -l 10)
+	chosen=$(cat $docs_file | awk -F '  ' '{print $2}' | sort | dmenu $base $DB -p " ")
 	
 	# Exit if none chosen.
 	[ -z "$chosen" ] && exit

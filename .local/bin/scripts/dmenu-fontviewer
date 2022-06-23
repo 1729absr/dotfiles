@@ -2,7 +2,7 @@
 
 . dmenu_base
 
-chosen=$(fc-list | awk -F ":" '{print $1}'|dmenu $base "Font Viewer:")
+chosen=$(fc-list | awk -F ":" '{print $1}'|dmenu $base $DB -p "Font Viewer:")
 
 # Exit if none chosen.
 [ -z "$chosen" ] && exit

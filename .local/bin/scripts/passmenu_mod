@@ -2,4 +2,4 @@
 
 . dmenu_base
 
-passmenu $base "Pass:"
+passmenu $base $DB -p "Pass:"

@@ -3,7 +3,7 @@
 nm-applet &
 picom -b &
 xwallpaper --zoom .local/share/wallpaper
-ifinstalled wal && wal -n -R &
+ifinstalled -q wal && wal -n -R &
 libinput-gestures-setup start &
 #setxkbmap -option caps:swapescape & #switch Esc and CapsLock Keys
 #blueman-applet &

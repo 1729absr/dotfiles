@@ -1,0 +1,3 @@
+#!/bin/sh
+
+lxappearance $1 && [ -f "$HOME/.gtkrc-2.0" ] && mv $HOME/.gtkrc-2.0 $XDG_CONFIG_HOME/gtk-2.0/gtkrc

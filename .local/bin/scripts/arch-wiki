@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. dmenu_base
+
+wikidir="/usr/share/doc/arch-wiki/html/en/"
+chosen=$(find ${wikidir} -iname "*.html" | sed 's/.*en\///g;s/\.html//g' | sort |dmenu $base $DB -p 'wiki')
+
+[ -z $chosen ] && exit
+
+to_open=$(find ${wikidir} -iname $chosen.html)
+
+xdg-open $to_open && exit

@@ -1,10 +1,15 @@
 #!/bin/sh
 
 FONT="MononokiNerdFont-18"
-COLOR_BACKGROUND="#151515"
+
+#COLOR_BACKGROUND="#333333"
+#COLOR_BACKGROUND="#151515"
+COLOR_BACKGROUND="#1b1d24"
 COLOR_DEFAULT="#aaaaaa"
-COLOR_HIGHLIGHT="#589cc5"
-SELECTED_BACKGROUND="#1a1a1a"
+COLOR_HIGHLIGHT="#1793d1"
+#SELECTED_BACKGROUND="#393939"
+#SELECTED_BACKGROUND="#1a1a1a"
+SELECTED_BACKGROUND="#1b1d24"
 
 ## If wanna use the pywal color scheme comment it out
 #. "${HOME}/.cache/wal/colors.sh"
@@ -18,4 +23,8 @@ base="-nb $COLOR_BACKGROUND \
 	-sf $COLOR_HIGHLIGHT \
 	-sb $SELECTED_BACKGROUND \
 	-fn $FONT\
-	-i -l 10 -p"
+	-i -l 10"
+
+Z=$((1920 - 2*$GAP))
+DB="-y $GAP -x $GAP -z $Z"
+PB="-y $((34+2*$GAP)) -x 1700 -z 212"

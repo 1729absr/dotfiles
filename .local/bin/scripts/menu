@@ -2,9 +2,9 @@
 
 . dmenu_base
 
-menu_file=~/.local/share/dmenu/menu_list
+menu_file=~/.local/share/dmenu/menu.list
 # Get user selection via dmenu from emoji file.
-chosen=$(awk -F "\t" '{print $1}' $menu_file | dmenu $base " ")
+chosen=$(awk -F "\t" '{print $1}' $menu_file | dmenu $base $DB -p " ")
 
 # Exit if none chosen.
 [ -z "$chosen" ] && exit

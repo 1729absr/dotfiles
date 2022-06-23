@@ -3,4 +3,4 @@
 . dmenu_base
 
 dmenu_run \
-	$base " "
+	$base $DB -p " "

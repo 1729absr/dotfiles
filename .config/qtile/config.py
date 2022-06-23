@@ -7,6 +7,7 @@ import os
 import subprocess
 
 home = os.path.expanduser('~')
+gap = int(os.environ['GAP'])
 mod = "mod4"
 terminal = "st"
 keys = [
@@ -265,24 +266,15 @@ keys = [
     # Cool Features ## requires: "xclip"
 ]
 
-#group_names = [("", {'layout': 'monadtall'}),
-#               ("", {'layout': 'max'}),
-#               ("", {'layout': 'monadtall'}),
-#               ("", {'layout': 'monadtall'}),
-#               ("", {'layout': 'monadtall'}),
-#               ("", {'layout': 'monadtall'}),
-#               ("", {'layout': 'floating'}),
-#               ("", {'layout': 'monadtall'}),
-#               ("", {'layout': 'monadtall'})]
-group_names = [("1", {'layout': 'monadtall'}),
-               ("2", {'layout': 'max'}),
-               ("3", {'layout': 'monadtall'}),
-               ("4", {'layout': 'monadtall'}),
-               ("5", {'layout': 'monadtall'}),
-               ("6", {'layout': 'monadtall'}),
-               ("7", {'layout': 'floating'}),
-               ("8", {'layout': 'monadtall'}),
-               ("9", {'layout': 'monadtall'})]
+group_names = [("1", {'label':'', 'layout': 'monadtall'}),
+               ("2", {'label':'', 'layout': 'monadtall'}),
+               ("3", {'label':'', 'layout': 'monadtall'}),
+               ("4", {'label':'', 'layout': 'monadtall'}),
+               ("5", {'label':'', 'layout': 'monadtall'}),
+               ("6", {'label':'', 'layout': 'monadtall'}),
+               ("7", {'label':'', 'layout': 'floating'}),
+               ("8", {'label':'', 'layout': 'monadtall'}),
+               ("9", {'label':'', 'layout': 'monadtall'})]
 
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -294,18 +286,20 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 layout_theme = {"border_width": 2,
                 "margin": 8,
                 "border_focus": "#04A5AA",
-                "border_normal": "#43576E"#"#303232"
+                "border_normal": "#43576E",#"#303232"
+                "single_border_width": 0,
+                "border_on_single": False
                 }
+
+layout_theme_ = layout_theme.copy()
+layout_theme_["margin"] = 0
 
 layouts = [
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
-    layout.Bsp(border_width= 4,
-                margin= 0,
-                border_focus= "#04A5AA",
-                border_normal= "#43576E"),
+    layout.Bsp(**layout_theme_),
     layout.Columns(**layout_theme),
-    layout.VerticalTile(border_width= 4, border_focus= "#04A5AA", border_normal= "#43576E"),
+    layout.VerticalTile(**layout_theme_),
     layout.Floating(**layout_theme),
     # layout.Stack(num_stacks=2),
     # layout.Matrix(),
@@ -323,25 +317,26 @@ widget_defaults = dict(
 )
 
 extension_defaults = widget_defaults.copy()
+
 screens = [
     Screen(
         top=bar.Bar(
             [
 		widget.TextBox(
-            text = "  ",
+            text = "  ",
             padding = 0,
-			foreground="#589cc5",
+			foreground="#1793d1",
             mouse_callbacks={'Button1': lazy.spawn("menu"),}
             ),
         widget.GroupBox(
-			#fontsize=34,
-			borderwidth=3,
+            fontsize=28,
+            borderwidth=1,
 			rounded=False,
-			highlight_method="line",
-			inactive = "888888",
-			highlight_color="#444444",
-			foreground="#ffffff",
-            disable_drag=True
+            highlight_method="text",
+			inactive = "#666666",
+            active='#dddddd',
+            this_current_screen_border="#1793d1",#"#589cc5",
+            disable_drag=True,
 			),
 		widget.Sep(
 			linewidth=1,
@@ -349,7 +344,7 @@ screens = [
 			foreground="#575757",
 			),
 		widget.CurrentLayout(
-			foreground="AABBCC",
+			foreground="#AABBCC",
 			),
 		widget.Sep(
 			linewidth=1,
@@ -358,11 +353,11 @@ screens = [
 			),
         widget.Prompt(
 			padding=10,
-			foreground='76C92D',
+			foreground='#76C92D',
 			background='#3d3f4b',
 			),
 		widget.WindowName(
-            max_chars=60,
+            max_chars=40,
             fontsize=20,
             mouse_callbacks={'Button2': lazy.window.kill(),
             'Button4':lazy.layout.up(),
@@ -426,8 +421,8 @@ screens = [
             ),
             ],
             34,
-	    background="#1b1d24",
-        #margin=[8, 8, 0, 8],
+        background="#1b1d24",
+        margin=[gap, gap, 0, gap],
 	    #opacity=0.1
         ),
     ),

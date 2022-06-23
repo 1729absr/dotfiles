@@ -17,7 +17,7 @@ default(){
 }
 
 set_wal_unsplash() {
-	genre=$(echo "..\ncity\nspace\nnight\nocean\nfire\nhell"|dmenu $base "genre: ")
+	genre=$(echo "..\ncity\nspace\nnight\nocean\nfire\nhell"|dmenu $base $DB -p "genre: ")
 
 	# Exit if none chosen.
 	[ -z "$genre" ] && exit
@@ -26,11 +26,7 @@ set_wal_unsplash() {
 	then
 		wallpaper && exit
 	else
-		if wget --quiet --spider https://source.unsplash.com/1920x1080/?"$genre"; then
-			wget -q -O "$WP" https://source.unsplash.com/1920x1080/?"$genre"
-		else
-			notify-send "No genre named $genre exists" && set_wal_unsplash && exit
-		fi
+		wget -q -O "$WP" https://source.unsplash.com/1920x1080/?"$genre" &&\
 		[ -f "${WP}" ] &&\
 			default "unsplash.com" && sleep 3 && set_wal_unsplash && exit
 	fi
@@ -48,7 +44,7 @@ set_wal_bing(){
 	#
 	# The idx parameter determines where to start from. 0 is the current day,
 	# 1 the previous day, etc.
-	mkt_param=$(echo "..\nen-US\nzh-CN\nja-JP\nen-AU\nen-UK\nde-DE\nen-NZ\nen-CA"|dmenu $base "mkt: ")
+	mkt_param=$(echo "..\nen-US\nzh-CN\nja-JP\nen-AU\nen-UK\nde-DE\nen-NZ\nen-CA"|dmenu $base  $DB -p "mkt: ")
 
 	# Exit if none chosen.
 	[ -z "$mkt_param" ] && exit
@@ -105,21 +101,24 @@ copy_fav() { \
 }
 
 if [ -z $1 ]; then
+	ba=".."
 	co="Copy current wallpaper to favourites"
 	cl="Set wallpaper from a local file"
 	cu="Change Wallpaper - unsplash as source"
 	cb="Change Wallpaper - bing as source"
-	chosen=$(printf "$co\n$cl\n$cu\n$cb"|dmenu $base " ")
+	chosen=$(echo "$ba\n$co\n$cl\n$cu\n$cb"|dmenu $base $DB -p " ")
 	
 	# Exit if none chosen.
 	[ -z "$chosen" ] && exit
 	
 	case $chosen in
+		$ba)
+			menu && exit;;
 		$co)
 			copy_fav;;
 		$cl)
 			local_dir=$(echo "..\n$XDG_PICTURES_DIR/wallpapers/selected/\n$XDG_PICTURES_DIR/wallpapers/\n$XDG_PICTURES_DIR/wallpapers/elementary/"|dmenu\
-				$base "Select one or enter Path:")
+				$base $DB -p "Select one or enter Path:")
 			[ -z "$local_dir" ] && exit
 			
 				if [ $local_dir = ".." ]
