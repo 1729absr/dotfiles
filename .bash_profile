@@ -33,9 +33,6 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 
-# Margin
-export GAP=8
-
 # Start GUI
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   exec startx "$XDG_CONFIG_HOME/X11/xinitrc"

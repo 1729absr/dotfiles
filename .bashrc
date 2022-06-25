@@ -23,4 +23,4 @@ source $HOME/.config/shell/aliases
 source ~/.cache/wal/colors-tty.sh
 
 # Prompt
-#eval "$(starship init bash)"
+eval "$(starship init bash)"

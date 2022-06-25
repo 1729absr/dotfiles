@@ -25,6 +25,9 @@ base="-nb $COLOR_BACKGROUND \
 	-fn $FONT\
 	-i -l 10"
 
+# Bar, Dmenu
+GAP=8
+
 Z=$((1920 - 2*$GAP))
 DB="-y $GAP -x $GAP -z $Z"
-PB="-y $((34+2*$GAP)) -x 1700 -z 212"
+PB="-y $((34+2*$GAP)) -x 1700 -z $((1920 - 1700 - $GAP))"

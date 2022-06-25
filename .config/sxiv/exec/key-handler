@@ -1,4 +1,5 @@
 #!/bin/sh
+. $HOME/.local/bin/scripts/dmenu_base
 while read file
 do
         case "$1" in
@@ -28,7 +29,7 @@ do
 		readlink -f "$file" | tr -d '\n' | xclip -selection clipboard &&
 			notify-send "$(readlink -f "$file") copied to clipboard" & ;;
 	"d")
-		[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted." ;;
+		[ "$(printf "No\\nYes" | dmenu $base -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted." ;;
 	"g")	ifinstalled gimp && setsid -f gimp "$file" ;;
 	"i")	notify-send "File information" "$(mediainfo "$file")" ;;
         esac

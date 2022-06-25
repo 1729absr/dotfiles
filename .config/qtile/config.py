@@ -7,7 +7,7 @@ import os
 import subprocess
 
 home = os.path.expanduser('~')
-gap = int(os.environ['GAP'])
+gap = int(subprocess.getoutput("grep GAP= "+home+"/.local/bin/scripts/dmenu_base | awk -F '=' '{print $2}'"))
 mod = "mod4"
 terminal = "st"
 keys = [
