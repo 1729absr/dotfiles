@@ -2,7 +2,7 @@
 
 . dmenu_base
 
-chosen=$(find /usr/share/man/ -type f | awk -F '/' '{print $6}' | sed 's/...gz//g' | sort | dmenu $base $DB -p "man")
+chosen=$(man -k . | sort | dmenu $base $DB -p "man" | awk '{print $1}')
 
 [ -z $chosen ] && exit
 

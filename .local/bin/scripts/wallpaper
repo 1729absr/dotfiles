@@ -125,7 +125,7 @@ if [ -z $1 ]; then
 				then
 					wallpaper && exit
 				else
-					sxiv -tb -r $local_dir
+					sxiv -tb -r $local_dir && wallpaper
 				fi
 				;;
 		$cu)

@@ -1,6 +1,6 @@
 from typing import List
 from libqtile import qtile, bar, layout, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 #from libqtile.utils import guess_terminal
 import os
@@ -96,10 +96,6 @@ keys = [
         desc="Toggle between split and unsplit sides of stack"
         ),
     Key([mod], "Return",
-        lazy.spawn(terminal),
-        desc="Launch terminal"
-        ),
-    Key(["mod1"], "space",
         lazy.spawn(terminal),
         desc="Launch terminal"
         ),
@@ -280,8 +276,11 @@ group_names = [("1", {'label':'', 'layout': 'monadtall'}),
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
 for i, (name, kwargs) in enumerate(group_names, 1):
-	keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
+	keys.append(Key([mod], str(i), lazy.group[name].toscreen(toggle=True)))        # Switch to another group
 	keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name, switch_group=True))) # Send current window to another group
+
+groups.append(ScratchPad("scratchpad", [DropDown("term", terminal, opacity=1, x=gap/1920, y=gap/1080, width=1-2*gap/1920)]))
+keys.append(Key(['mod1'], 'space', lazy.group['scratchpad'].dropdown_toggle('term')))
 
 layout_theme = {"border_width": 2,
                 "margin": 8,
@@ -322,108 +321,112 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-		widget.TextBox(
-            text = "  ",
-            padding = 0,
-			foreground="#1793d1",
-            mouse_callbacks={'Button1': lazy.spawn("menu"),}
-            ),
-        widget.GroupBox(
-            fontsize=28,
-            borderwidth=1,
-			rounded=False,
-            highlight_method="text",
-			inactive = "#666666",
-            active='#dddddd',
-            this_current_screen_border="#1793d1",#"#589cc5",
-            disable_drag=True,
-			),
-		widget.Sep(
-			linewidth=1,
-			padding=5,
-			foreground="#575757",
-			),
-		widget.CurrentLayout(
-			foreground="#AABBCC",
-			),
-		widget.Sep(
-			linewidth=1,
-			padding=5,
-			foreground="#575757",
-			),
-        widget.Prompt(
-			padding=10,
-			foreground='#76C92D',
-			background='#3d3f4b',
-			),
-		widget.WindowName(
-            max_chars=40,
-            fontsize=20,
-            mouse_callbacks={'Button2': lazy.window.kill(),
-            'Button4':lazy.layout.up(),
-            'Button5':lazy.layout.down(),}
-            ),
-        widget.Cmus(
-			background='3d3f4b',
-            play_color='76C92D',
-            max_chars=25,
-            ),
-        widget.Chord(
-            chords_colors={
-                            'launch': ("#ff0000", "#ffffff"),
-                          },
-            name_transform=lambda name: name.upper(),
-            ),
-        widget.TextBox(
-            text = " ",
-            padding = 0
-            ),
-        widget.Systray(
-			icon_size=32,
-			),
-		widget.TextBox(
-            text = "  ",
-            padding = 0
-            ),
-		widget.Backlight(
-			backlight_name='intel_backlight',
-            change_command="brightnessctl -s set {0}%",
-            step=2
-			),
-        widget.GenPollText(
-            update_interval=1,
-            func=lambda: subprocess.check_output("show_volume").decode(),
-            mouse_callbacks={'Button4': lambda: qtile.cmd_spawn("change_volume +2%", shell=True),
-            'Button5': lambda: qtile.cmd_spawn("change_volume -2%", shell=True),
-            'Button3': lambda: qtile.cmd_spawn("change_volume toggle", shell=True),
-            'Button2': lambda: qtile.cmd_spawn("pavucontrol", shell=True),}
-            ),
-        widget.TextBox(
-            text = " ",
-            padding = 0
-            ),
-        widget.GenPollText(
-            update_interval=2,
-            func=lambda: subprocess.check_output("battery").decode(),
-            ),
-        widget.Clock(
-			padding=5,
-            format=' %H:%M',
-            mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("calendar c"),
-            'Button4': lambda: qtile.cmd_spawn("calendar p"),
-            'Button5': lambda: qtile.cmd_spawn("calendar n"),}
-			),
-        widget.TextBox(
-            text = "",
-            #foreground="#AA7700",
-            padding = 10,
-            mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("powermenu")}
-            ),
+		        widget.TextBox(
+                    text = "  ",
+                    padding = 0,
+		        	foreground="#1793d1",
+                    mouse_callbacks={'Button1': lazy.spawn("menu"),}
+                    ),
+                #widget.LaunchBar(
+                #    progs=[(' ', 'firefox'), ('', 'st'), ('','thunar')]
+                #    ),
+                widget.GroupBox(
+                    fontsize=28,
+                    borderwidth=1,
+		        	rounded=False,
+                    highlight_method="text",
+		        	inactive = "#666666",
+                    active='#dddddd',
+                    this_current_screen_border="#1793d1",#"#589cc5",
+                    disable_drag=True,
+		        	),
+		        widget.Sep(
+		        	linewidth=1,
+		        	padding=5,
+		        	foreground="#575757",
+		        	),
+		        widget.CurrentLayout(
+		        	foreground="#AABBCC",
+		        	),
+		        widget.Sep(
+		        	linewidth=1,
+		        	padding=5,
+		        	foreground="#575757",
+		        	),
+                widget.Prompt(
+		        	padding=10,
+		        	foreground='#76C92D',
+		        	background='#3d3f4b',
+		        	),
+                widget.StatusNotifier(),
+		        widget.WindowName(
+                    max_chars=40,
+                    fontsize=20,
+                    mouse_callbacks={'Button2': lazy.window.kill(),
+                    'Button4':lazy.layout.up(),
+                    'Button5':lazy.layout.down(),}
+                    ),
+                widget.Cmus(
+		        	background='3d3f4b',
+                    play_color='76C92D',
+                    max_chars=25,
+                    ),
+                widget.Chord(
+                    chords_colors={
+                                    'launch': ("#ff0000", "#ffffff"),
+                                  },
+                    name_transform=lambda name: name.upper(),
+                    ),
+                widget.TextBox(
+                    text = " ",
+                    padding = 0
+                    ),
+                widget.Systray(
+		        	icon_size=32,
+		        	),
+		        widget.TextBox(
+                    text = "  ",
+                    padding = 0
+                    ),
+		        widget.Backlight(
+		        	backlight_name='intel_backlight',
+                    change_command="brightnessctl -s set {0}%",
+                    step=2
+		        	),
+                widget.GenPollText(
+                    update_interval=1,
+                    func=lambda: subprocess.check_output("show_volume").decode(),
+                    mouse_callbacks={'Button4': lambda: qtile.cmd_spawn("change_volume +2%", shell=True),
+                    'Button5': lambda: qtile.cmd_spawn("change_volume -2%", shell=True),
+                    'Button3': lambda: qtile.cmd_spawn("change_volume toggle", shell=True),
+                    'Button2': lambda: qtile.cmd_spawn("pavucontrol", shell=True),}
+                    ),
+                widget.TextBox(
+                    text = " ",
+                    padding = 0
+                    ),
+                widget.GenPollText(
+                    update_interval=2,
+                    func=lambda: subprocess.check_output("battery").decode(),
+                    ),
+                widget.Clock(
+		        	padding=5,
+                    format=' %H:%M',
+                    mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("calendar c"),
+                    'Button4': lambda: qtile.cmd_spawn("calendar p"),
+                    'Button5': lambda: qtile.cmd_spawn("calendar n"),}
+		        	),
+                widget.TextBox(
+                    text = "",
+                    #foreground="#AA7700",
+                    padding = 10,
+                    mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("powermenu")}
+                    ),
             ],
             34,
-        background="#1b1d24",
-        margin=[gap, gap, 0, gap],
-	    #opacity=0.1
+            background="#1b1d24",
+            margin=[gap, gap, 0, gap],
+	        #opacity=0.1
         ),
     ),
 ]

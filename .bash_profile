@@ -32,6 +32,8 @@ export RANDFILE="$XDG_CONFIG_HOME/rnd"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+export ANDROID_HOME="$XDG_DATA_HOME"/android
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 
 # Start GUI
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
