@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 # Arbitrary but unique message id
 msgId="991049"
 
 # Change the volume using pulseaudio
-if [ $@ == "toggle" ]; then
+if [ "$@" = "toggle" ]; then
 	pactl set-sink-mute @DEFAULT_SINK@ "$@" > /dev/null
 else
 	pactl set-sink-volume @DEFAULT_SINK@ "$@" > /dev/null
@@ -13,13 +13,15 @@ fi
 volume="$(pactl get-sink-volume @DEFAULT_SINK@|awk '{print $5}'|sed 's/[^0-9]*//g')"
 mute="$(pactl get-sink-mute @DEFAULT_SINK@|awk '{print $2}')"
 
-if [[ $volume == 0 || "$mute" == "yes" ]]; then
-    # Show the sound muted notification
-    dunstify -a "changeVolume" -u low -t 1200 -i audio-volume-muted -r "$msgId" "Volume muted" 
+if [ $volume = 0 ]; then
+	# Show the sound muted notification
+	dunstify -a "changeVolume" -u low -t 1200 -i audio-volume-muted -r "$msgId" "Volume muted" 
+elif [ "$mute" = "yes" ]; then
+	dunstify -a "changeVolume" -u low -t 1200 -i audio-volume-muted -r "$msgId" "Volume muted" 
 else
-    # Show the volume notification
-    dunstify -a "changeVolume" -u low -t 1200 -i audio-volume-high -r "$msgId" \
-    -h int:value:"$volume" "Volume: ${volume}%"
+	# Show the volume notification
+	dunstify -a "changeVolume" -u low -t 1200 -i audio-volume-high -r "$msgId" \
+		-h int:value:"$volume" "Volume: ${volume}%"
 fi
 
 # Play the volume changed sound

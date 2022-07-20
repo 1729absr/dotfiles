@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case $1 in
+	-u)
+		rsync -aP --delete ~/main/ lab:~/main;;
+	-d)
+		rsync -aP --delete lab:~/main/ ~/main;;
+	*)
+		echo "Enter: which way to sync";;
+esac

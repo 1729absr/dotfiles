@@ -6,12 +6,11 @@
 
 export PATH=$PATH:$HOME/.local/bin:$HOME/.local/bin/scripts
 export HISTCONTROL=ignoreboth
-#export TERM=xterm-256color
-export TERM='st'
+export TERM="st"
+export TERMINAL="st"
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export EDITOR="nvim"
 export BROWSER="firefox"
-export TERMINAL="st"
 export READER="zathura"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export RANGER_LOAD_DEFAULT_RC=FALSE

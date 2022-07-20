@@ -5,7 +5,7 @@
 docs_file="$HOME/.local/share/dmenu/papers.list"
 
 add(){
-	docs_dir=$(cd "$1"; pwd)
+	docs_dir=$(cd $1 2> /dev/null ; pwd)
 	echo $docs_dir
 	docs_list="$(find "$docs_dir" -name '*.pdf')"
 	# Changing the IFS Variable, So that it will split

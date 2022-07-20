@@ -4,14 +4,6 @@
 autocmd FileType python nnoremap <buffer> <F9> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
 
 "------------------------------------------------------------------------
-" Using vim-plug to call the plugins
-"------------------------------------------------------------------------
-call plug#begin('~/.config/nvim/plugged')
-Plug 'jpalardy/vim-slime', { 'for': 'python' }
-Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
-call plug#end()
-
-"------------------------------------------------------------------------
 " IPython
 "------------------------------------------------------------------------
 " map <F5> to save and run script

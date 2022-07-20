@@ -58,9 +58,9 @@ UXTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 !*.color7:     #BFBFBF
 !*.color15:    #E6E6E6
 
-#include "/home/yoda/.cache/wal/colors.Xresources"
+!#include "/home/yoda/.cache/wal/colors.Xresources"
 
 !! Sxiv
-!Sxiv.background: #000000
+Sxiv.background: #202020
 Sxiv.foreground: #04A5AA
 Sxiv.font: MononokiNerdFont-14

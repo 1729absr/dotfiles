@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. "${HOME}/.cache/wal/colors.sh"
+[ -d "$HOME/.cache/wal" ] && . "${HOME}/.cache/wal/colors.sh" || . "$HOME/.local/bin/scripts/dmenu_base" && color3=$COLOR_HIGHLIGHT
 send_notification() {
 	TODAY=$(date '+%-d')
 	HEAD=$(cal "$1" | head -n1)

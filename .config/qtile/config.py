@@ -1,7 +1,8 @@
 from typing import List
 from libqtile import qtile, bar, layout, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
+from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
+from qtile_extras import widget as ewd
 #from libqtile.utils import guess_terminal
 import os
 import subprocess
@@ -53,7 +54,7 @@ keys = [
         ),
 
     # Change windowsize.
-    ## In 'columns' layout
+    # -> In 'columns' layout
     Key([mod, "control"], "h",
         lazy.layout.grow_left().when(layout='columns'),
         desc="Grow window to the right"
@@ -70,7 +71,7 @@ keys = [
         lazy.layout.grow_right().when(layout='columns'),
         desc="Grow window to the left"
         ),
-    ## In monadtall and verticaltile
+    # -> In monadtall and verticaltile
     Key([mod, "control"], "i",
         lazy.layout.grow().when(layout='monadtall'),
         desc="Grow in size"
@@ -80,7 +81,7 @@ keys = [
         lazy.layout.maximize().when(layout='verticaltile'),
         desc="Grow window to the left"
         ),
-    # Normalize all
+    # -> Normalize all
     Key([mod, "control"], "n",
         lazy.layout.normalize().when(layout=['columns','verticaltile']),
         lazy.layout.reset().when(layout='monadtall'),
@@ -142,7 +143,7 @@ keys = [
         desc='toggle floating'
         ),
 
-    #Audio control
+    # Audio control
     Key([],"XF86AudioRaiseVolume",
         lazy.spawn("change_volume +2%"),
         desc="Volume Up"
@@ -160,13 +161,13 @@ keys = [
         lazy.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle"),
         desc="Mute Mic"
         ),
-    ## Pavucontrol
+    # Pavucontrol
     Key([mod], "p",
         lazy.spawn("pavucontrol"),
         desc="Pulse audio volume control"
         ),
 
-    #Brightness
+    # Brightness
     Key([], "XF86MonBrightnessUp",
         lazy.spawn("brightnessctl -s set +1%"),
         desc="Brigtness Up"
@@ -175,8 +176,20 @@ keys = [
         lazy.spawn("brightnessctl -s set 1%-"),
         desc="Brightness Down"
         ),
+    KeyChord([mod], "b", [
+        Key([], "k",
+            lazy.spawn("brightnessctl -s set +1%"),
+            desc="Brigtness Up"
+            ),
+        Key([], "j",
+            lazy.spawn("brightnessctl -s set 1%-"),
+            desc="Brightness Down"
+            ),
+        ],
+        mode="backlight"
+        ),
 
-    #PrintScreen saves it to $HOME/Pictures/Scrot
+    # PrintScreen saves it to $HOME/Pictures/Scrot
     Key([], "Print",
         lazy.spawn("scrot_full"),
         desc="Takes screen-shot of full screen"
@@ -186,84 +199,135 @@ keys = [
         desc="Select and take a screen-shot of selected part"
         ),
 
-    #Browser
-    ## Firefox
+    # Browser
+    # -> Firefox
     Key([mod], "x",
         lazy.spawn("firefox"),
         desc="Launch Firefox"
         ),
-    ## QuteBrowser
-    Key([mod], "z",
-        lazy.spawn("qutebrowser"),
-        desc="Launch QuteBrowser"
-        ),
-    ## Brave
-    Key([mod], "b",
-        lazy.spawn("chromium --force-device-scale-factor=1.3"),
-        desc="Launch chromium"
-        ),
 
-    #configs (for xterm add -wf)
-    ## qtile
-    Key([mod], "F1",
-        lazy.spawn(terminal+" -e nvim "+home+"/.config/qtile/config.py"),
-        desc="Qtile config"
-        ),
-    ### qtile autostart
-    Key([mod], "F2",
-        lazy.spawn(terminal+" -e nvim "+home+"/.config/qtile/autostart.sh"),
-        desc="Qtile config"
-        ),
-    ## picom
-    Key([mod], "F3",
-        lazy.spawn(terminal+" -e nvim "+home+"/.config/picom/picom.conf"),
-        desc="picom config"
-        ),
-    
-    #PowerMenu
-    Key([mod, "shift"],"p",
-        lazy.spawn("powermenu")
-        ),
-
-    #File manager
-    ## Thunar
+    # File manager
+    # -> Thunar
     Key([mod], "t",
         lazy.spawn("thunar"),
         desc="Launch Thunar"
         ),
 
+    #configs (for xterm add -wf)
+    KeyChord([mod], "c", [
+        # -> autostart
+        Key([], "a",
+            lazy.spawn(terminal+" -e nvim "+home+"/.config/qtile/autostart.sh"),
+            desc="Autostart"
+            ),
+        # -> dunst
+        Key([], "d",
+            lazy.spawn(terminal+" -e nvim "+home+"/.config/dunst/dunstrc"),
+            desc="dunstrc"
+            ),
+        # -> picom
+        Key([], "p",
+            lazy.spawn(terminal+" -e nvim "+home+"/.config/picom/picom.conf"),
+            desc="picom config"
+            ),
+        # -> qtile
+        Key([], "q",
+            lazy.spawn(terminal+" -e nvim "+home+"/.config/qtile/config.py"),
+            desc="Qtile config"
+            ),
+        # -> sxiv
+        Key([], "s",
+            lazy.spawn(terminal+" -e nvim "+home+"/.config/dunst/dunstrc"),
+            desc="Sxiv Key-handler"
+            ),
+        ],
+        mode="config"
+        ),
 
-    # dmenu desktop files
+    # Dmenu
+    # -> dmenu desktop files
     Key([mod], "a",
         lazy.spawn("menu"),
         desc="menu"
         ),
-    # dmenu
+    # -> dmenu_run
     Key(["mod1"], "Return",
         lazy.spawn("dmenu_mod"),
         desc="dmenu"
         ),
-    # dmenu-Pass
-    Key([mod, "mod1"], "Return",
-        lazy.spawn("passmenu_mod"),
-        desc="pass"
-        ),
-    # dmenu-emoji
-    Key([mod], "e",
-        lazy.spawn("dmenuunicode"),
-        desc="Emoji support"
+    KeyChord([mod], "d", [
+        # -> dmenu-Pass
+        Key([], "p",
+            lazy.spawn("passmenu_mod"),
+            desc="pass"
+            ),
+        # -> dmenu-emoji
+        Key([], "e",
+            lazy.spawn("dmenuunicode"),
+            desc="Emoji support"
+            ),
+        # -> dmenu-ambient-sounds-player
+        Key([], "a",
+            lazy.spawn("ambient"),
+            desc="Ambient Sound Player"
+            ),
+        # -> dmenu of papers and books organiser
+        Key([], "r",
+            lazy.spawn("rorg"),
+            desc="Research Paper Organiser"
+            ),
+        # -> PowerMenu
+        Key([mod], "p",
+            lazy.spawn("powermenu")
+            ),
+            ],
+        mode='dmenu'
         ),
 
-    #LibreOffice
-    Key([mod], "o",
-        lazy.spawn(home+"/Activities/OSS/LibreOffice.AppImage")
+    # Control mouse from keyboard
+    KeyChord([mod], "m", [
+        # -> move up
+        Key([], "k",
+            lazy.spawn("xdotool mousemove_relative -- 0 -15"),
+            desc="move pointer up"
+            ),
+        # -> move down
+        Key([], "j",
+            lazy.spawn("xdotool mousemove_relative -- 0 +15"),
+            desc="move pointer down"
+            ),
+        # -> move right
+        Key([], "l",
+            lazy.spawn("xdotool mousemove_relative -- +15 0"),
+            desc="move pointer right"
+            ),
+        # -> move left
+        Key([], "h",
+            lazy.spawn("xdotool mousemove_relative -- -15 0"),
+            desc="move pointer left"
+            ),
+        # -> click 1
+        Key([], "b",
+            lazy.spawn("xdotool click 1"),
+            desc="cick left mouse button"
+            ),
+        # -> click 2
+        Key([], "n",
+            lazy.spawn("xdotool click 2"),
+            desc="cick left mouse button"
+            ),
+        # -> click 3
+        Key([], "m",
+            lazy.spawn("xdotool click 3"),
+            desc="cick left mouse button"
+            ),
+            ],
+        mode='mouse'
         ),
-
-    # Cool Features ## requires: "xclip"
 ]
 
 group_names = [("1", {'label':'', 'layout': 'monadtall'}),
-               ("2", {'label':'', 'layout': 'monadtall'}),
+               ("2", {'label':'', 'layout': 'max'}),
                ("3", {'label':'', 'layout': 'monadtall'}),
                ("4", {'label':'', 'layout': 'monadtall'}),
                ("5", {'label':'', 'layout': 'monadtall'}),
@@ -321,15 +385,13 @@ screens = [
     Screen(
         top=bar.Bar(
             [
+                #ewd.GlobalMenu(),
 		        widget.TextBox(
                     text = "  ",
                     padding = 0,
 		        	foreground="#1793d1",
                     mouse_callbacks={'Button1': lazy.spawn("menu"),}
                     ),
-                #widget.LaunchBar(
-                #    progs=[(' ', 'firefox'), ('', 'st'), ('','thunar')]
-                #    ),
                 widget.GroupBox(
                     fontsize=28,
                     borderwidth=1,
@@ -353,29 +415,34 @@ screens = [
 		        	padding=5,
 		        	foreground="#575757",
 		        	),
+                widget.Chord(
+                    chords_colors={
+                                    'config': ("#171919", "#1793d1"),
+                                    'dmenu': ("#171919", "#994477"),
+                                    'mouse': ("#171919", "#998775"),
+                                    'backlight': ("#171919", "#cccc11"),
+                                  },
+                    ),
                 widget.Prompt(
 		        	padding=10,
 		        	foreground='#76C92D',
 		        	background='#3d3f4b',
 		        	),
-                widget.StatusNotifier(),
+                #widget.StatusNotifier(),
 		        widget.WindowName(
                     max_chars=40,
                     fontsize=20,
-                    mouse_callbacks={'Button2': lazy.window.kill(),
-                    'Button4':lazy.layout.up(),
-                    'Button5':lazy.layout.down(),}
+                    mouse_callbacks={
+                        'Button1':lazy.spawn("xdotool key ctrl+k"),
+                        'Button2':lazy.window.kill(),
+                        'Button3':lazy.spawn("xdotool key F1"),
+                        'Button4':lazy.layout.up(),
+                        'Button5':lazy.layout.down(),}
                     ),
                 widget.Cmus(
 		        	background='3d3f4b',
                     play_color='76C92D',
                     max_chars=25,
-                    ),
-                widget.Chord(
-                    chords_colors={
-                                    'launch': ("#ff0000", "#ffffff"),
-                                  },
-                    name_transform=lambda name: name.upper(),
                     ),
                 widget.TextBox(
                     text = " ",
@@ -424,7 +491,7 @@ screens = [
                     ),
             ],
             34,
-            background="#1b1d24",
+            background="#171717",#"#1b1d24",
             margin=[gap, gap, 0, gap],
 	        #opacity=0.1
         ),

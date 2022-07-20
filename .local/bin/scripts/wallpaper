@@ -92,7 +92,7 @@ copy_fav() { \
 			fav_name=selected_$(date '+%Y-%m-%d_%H-%M-%S')".jpg" &&\
 			cp $WP $fav_dir/$fav_name &&\
 			notify-send "Wallpaper copied to Favourites"&&\
-			wallpaper &&\
+			sleep 1 && wallpaper &&\
 			exit
 		else
 			notify-send "Directory for selected wallpapers $fav_dir does not exist" && exit

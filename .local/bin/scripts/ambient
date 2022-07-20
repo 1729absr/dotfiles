@@ -1,0 +1,31 @@
+#!/bin/sh
+
+. dmenu_base
+
+ch="Choose a sound"
+rn="Play randomly"
+ki="Stop it"
+Dir="$HOME/music/ambient_sounds/"
+
+SoundFiles=$(/bin/ls -1 "$Dir")
+
+chosen=$(echo "$ch\n$rn\n$ki"|dmenu $base $DB -p " ")
+
+[ -z $chosen ] && exit
+
+if [ "$chosen" = "$ch" ]
+then
+	s2p=$(printf '%s\n' "$SoundFiles"|sort|dmenu $base $DB -p " ")
+	[ -z $s2p ] && exit
+	mpv --loop "$Dir/$s2p" || exit
+elif [ "$chosen" = "$rn" ]
+then
+	s2p=$(printf '%s\n' "$SoundFiles"|shuf -n 1)
+	[ -z $s2p ] && exit
+	mpv --loop "$Dir/$s2p" || exit
+elif [ "$chosen" = "$ki" ]
+then
+	killall mpv
+else
+	exit
+fi

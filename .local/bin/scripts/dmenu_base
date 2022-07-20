@@ -2,13 +2,9 @@
 
 FONT="MononokiNerdFont-18"
 
-#COLOR_BACKGROUND="#333333"
 COLOR_BACKGROUND="#151515"
-#COLOR_BACKGROUND="#1b1d24"
 COLOR_DEFAULT="#aaaaaa"
 COLOR_HIGHLIGHT="#1793d1"
-#SELECTED_BACKGROUND="#393939"
-#SELECTED_BACKGROUND="#1a1a1a"
 SELECTED_BACKGROUND="#1b1d24"
 
 ## If wanna use the pywal color scheme comment it out
@@ -26,7 +22,7 @@ base="-nb $COLOR_BACKGROUND \
 	-i -l 10"
 
 # Bar, Dmenu
-GAP=8
+GAP=0
 
 Z=$((1920 - 2*$GAP))
 DB="-y $GAP -x $GAP -z $Z"

@@ -3,11 +3,33 @@
 . dmenu_base
 
 menu_file=~/.local/share/dmenu/menu.list
-# Get user selection via dmenu from emoji file.
-chosen=$(awk -F "\t" '{print $1}' $menu_file | dmenu $base $DB -p " ")
 
-# Exit if none chosen.
-[ -z "$chosen" ] && exit
+default(){
+	chosen=$(awk -F "\t" '{print $1}' $menu_file | sort | dmenu $base $DB -p " ")
+	
+	# Exit if none chosen.
+	[ -z "$chosen" ] && exit
+	
+	to_run=$(grep "$chosen" $menu_file| sed "s/.*\t//g")
+	$to_run
+}
 
-to_run=$(grep "$chosen" $menu_file| sed "s/.*\t//g")
-$to_run
+update(){
+	Ddir="/usr/share/applications"
+	D_names=$(ls $Ddir|grep .desktop)
+	cat ~/.local/share/dmenu/menu_base.list > $menu_file
+	for D in $D_names; do
+		app_name=$(grep -w "Name=.*" $Ddir/$D|head -n1|sed "s/Name=//")
+		app_exec=$(grep -w "Exec=.*" $Ddir/$D|head -n1|sed "s/Exec=//")
+		terminal=$(grep -w "Terminal=.*" $Ddir/$D|head -n1|sed "s/Terminal=//")
+		[ $terminal = "true" ] && app_exec="st -e "$app_exec
+		echo "$app_name\t$app_exec" | sed "s/%.*//" >> $menu_file
+	done
+}
+
+case $1 in
+	update)
+		update;;
+	*)
+		default;;
+esac

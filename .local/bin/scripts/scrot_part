@@ -1,4 +1,4 @@
 #!/bin/sh
 . $XDG_CONFIG_HOME/user-dirs.dirs
 time="scrot_"$(date '+%Y-%m-%d_%H-%M-%S')".png"
-xdotool mousemove_relative -- 0 -15 && import $XDG_PICTURES_DIR/screenshots/$time
+xdotool mousemove_relative -- 0 -1 && import $XDG_PICTURES_DIR/screenshots/$time
