@@ -343,7 +343,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 	keys.append(Key([mod], str(i), lazy.group[name].toscreen(toggle=True)))        # Switch to another group
 	keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name, switch_group=True))) # Send current window to another group
 
-groups.append(ScratchPad("scratchpad", [DropDown("term", terminal, opacity=1, x=gap/1920, y=gap/1080, width=1-2*gap/1920)]))
+groups.append(ScratchPad("scratchpad", [DropDown("term", terminal, opacity=1, x=gap/1920, y=gap/1080, height=0.6, width=1-2*gap/1920)]))
 keys.append(Key(['mod1'], 'space', lazy.group['scratchpad'].dropdown_toggle('term')))
 
 layout_theme = {"border_width": 2,
