@@ -2,7 +2,6 @@ from typing import List
 from libqtile import qtile, bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
-from qtile_extras import widget as ewd
 #from libqtile.utils import guess_terminal
 import os
 import subprocess
@@ -385,7 +384,6 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                #ewd.GlobalMenu(),
 		        widget.TextBox(
                     text = "  ",
                     padding = 0,

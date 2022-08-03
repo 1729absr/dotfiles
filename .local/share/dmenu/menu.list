@@ -1,6 +1,6 @@
 Arch-Wiki	arch-wiki
 LxAppearance	appearance
-Reference Manager (Dmenu)	rporg
+Reference Manager (Dmenu)	rorg
 Wallpaper Manager	wallpaper
 Zman (Man pages in Zathura)	zman
 Font Manager	dmenu-fontviewer
@@ -11,6 +11,7 @@ Avahi SSH Server Browser	/usr/bin/bssh
 Avahi VNC Server Browser	/usr/bin/bvnc
 CMake	cmake-gui 
 Foliate	com.github.johnfactotum.Foliate 
+Xournal++	xournalpp 
 compton	compton
 PacFinder	pacfinder
 Manage Printing	/usr/bin/xdg-open http://localhost:631/
@@ -34,6 +35,7 @@ Network	nm-applet
 Advanced Network Configuration	nm-connection-editor
 Neovim	st -e nvim 
 FontForge	fontforge 
+Feeds	/usr/bin/gfeeds 
 Archive Manager	file-roller 
 Zathura	zathura 
 Zathura	zathura 
@@ -46,6 +48,7 @@ Qt5 Settings	qt5ct
 Qt V4L2 test Utility	qv4l2
 Qt V4L2 video capture utility	qvidcap
 ranger	st -e ranger
+R	st -e R
 sxiv	sxiv 
 Bulk Rename	thunar --bulk-rename 
 Thunar File Manager	thunar 

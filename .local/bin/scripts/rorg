@@ -3,11 +3,12 @@
 . dmenu_base
 
 docs_file="$HOME/.local/share/dmenu/papers.list"
+material="$HOME/main/reading/pdf"
 
 add(){
-	docs_dir=$(cd $1 2> /dev/null ; pwd)
-	echo $docs_dir
-	docs_list="$(find "$docs_dir" -name '*.pdf')"
+	[ -d "$1" ] && docs_dir=$(cd $1 2> /dev/null ; pwd) &&\
+		docs_list="$(find "$docs_dir" -name '*.pdf')" ||\
+		docs_list=$(pwd)/"$1"
 	# Changing the IFS Variable, So that it will split
 	# line by line instead of words separated by spaces
 	(IFS='
@@ -40,9 +41,12 @@ if [ -z $1 ]; then
 else
 	case $1 in
 		--add)
-			add $2 && exit;;
+			add "$2" && exit;;
 		--clean)
 			clean && exit;;
+		--update)
+			[ -f $docs_file ] || $(touch "$docs_file") &&
+			clean && add $material &&exit;;
 	esac
 fi
 

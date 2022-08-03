@@ -11,13 +11,14 @@ WP=$HOME/.local/share/wallpaper
 
 default(){
 	xwallpaper --zoom $WP &&\
-	notify-send -i emblem-photos "Wallpaper changed (source: $1)" &&\
-	ifinstalled wal && $(rm -r "$HOME/.cache/wal/schemes/")\
-	wal -n -i $WP && $(python "${HOME}/.config/wal/lxterminal")
+	notify-send -i emblem-photos "Wallpaper changed (source: $1)"
+	## Uncomment to use wal coloring
+	#ifinstalled wal && $(rm -r "$HOME/.cache/wal/schemes/") &&\
+	#wal -n -i $WP && $(python "${HOME}/.config/wal/lxterminal")
 }
 
 set_wal_unsplash() {
-	genre=$(echo "..\ncity\nspace\nnight\nocean\nfire\nhell"|dmenu $base $DB -p "genre: ")
+	genre=$(echo "..\nanime\ncity\nspace\nnight\nocean\nfire\nhell"|dmenu $base $DB -p "genre: ")
 
 	# Exit if none chosen.
 	[ -z "$genre" ] && exit
@@ -117,7 +118,7 @@ if [ -z $1 ]; then
 		$co)
 			copy_fav;;
 		$cl)
-			local_dir=$(echo "..\n$XDG_PICTURES_DIR/wallpapers/selected/\n$XDG_PICTURES_DIR/wallpapers/\n$XDG_PICTURES_DIR/wallpapers/elementary/"|dmenu\
+			local_dir=$(ls -1 "$XDG_PICTURES_DIR/wallpapers/"|dmenu\
 				$base $DB -p "Select one or enter Path:")
 			[ -z "$local_dir" ] && exit
 			
@@ -125,7 +126,7 @@ if [ -z $1 ]; then
 				then
 					wallpaper && exit
 				else
-					sxiv -tb -r $local_dir && wallpaper
+					sxiv -tb -r $XDG_PICTURES_DIR/wallpapers/$local_dir && wallpaper
 				fi
 				;;
 		$cu)

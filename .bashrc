@@ -12,7 +12,7 @@ PS1="\[\e[35m\][\[\e[m\]\[\e[35m\]\W\[\e[m\]\[\e[35m\]]\[\e[m\]\[\e[32m\]\\$\[\e
 ##
 stty -ixon	# Disable ctrl-s and ctrl-q
 shopt -s autocd	# Allows you to cd into dir merely by typing dir name
-#set -o vi	# Vim in bash
+set -o vi	# Vi key-bindings in bash
 
 HISTSIZE=10000000
 SAVEHIST=10000000

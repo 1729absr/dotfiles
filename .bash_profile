@@ -33,6 +33,7 @@ export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 export ANDROID_HOME="$XDG_DATA_HOME"/android
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
 
 # Start GUI
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
