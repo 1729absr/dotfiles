@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Coloring ->
+alias ls='ls --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+alias ip='ip -color=auto'
+
+##
+alias la='ls -A --group-directories-first'
+alias ll='ls -lA --group-directories-first'
+alias vim='nvim'
+alias dfiles='/usr/bin/git --git-dir="$XDG_CONFIG_HOME"/dotfiles --work-tree=/home/yoda'
+alias p='sudo pacman'
+alias ss='sudo systemctl'
+alias yt='yt-dlp -o "/home/yoda/vids/%(title)s.%(ext)s" --add-metadata -ic $(xclip -o)'
+alias yta='yt-dlp -o "/home/yoda/music/%(title)s.%(ext)s" --add-metadata -xic $(xclip -o)'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias gpg2='gpg2 --homedir "$XDG_DATA_HOME"/gnupg'
+
+# Dmenu ->
+. $HOME/.local/bin/scripts/dmenu_base
+alias dmenu='dmenu $base "dmenu"'
+
+# Window Swallowing ->
+alias mpv='devour mpv --loop-file=yes'
+alias zathura='devour zathura'
+alias ffplay='devour ffplay'
+alias scrcpy='devour scrcpy'
+alias vncviewer='devour vncviewer'
+
+# Bookmarks ->
+alias sc="cd $HOME/.local/bin/scripts"
+alias fc="cd $HOME/.mozilla/firefox/geuo0fq7.default-release/chrome"
