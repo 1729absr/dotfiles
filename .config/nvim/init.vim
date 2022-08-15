@@ -12,17 +12,19 @@ set path+=**
 " Display all the matching files when we tab complete
 set wildmenu
 
+" Synctex
+let g:vimtex_view_method = 'zathura'
+let g:latex_view_general_viewer = 'zathura'
+let g:vimtex_compiler_progname = 'nvr'
+
 " Making tags includings sub-dir contents
 command! MakeTags !ctags -R .
 
-"------------------------------------------------------------------------
-" This script contains general plugin specific settings
-"------------------------------------------------------------------------
+" Plugins
 source ~/.config/nvim/plugins.vim
-colorscheme PaperColor
+
+colorscheme codedark
 set laststatus=2
 
-"------------------------------------------------------------------------
-" This script contains key-bindings
-"------------------------------------------------------------------------
+" Key-bindings
 source ~/.config/nvim/bindings.vim

@@ -12,7 +12,9 @@ function! Synctex()
 endfunction
 map <C-enter> :call Synctex()<cr>
 
-nnoremap <buffer> <F9> :w<CR>:exec '!pdflatex -synctex=1' shellescape(@%, 1)<CR>
+nnoremap <buffer> <F9> :w<CR>:exec '!pdflatex ' shellescape(@%, 1)<CR>
 
-inoremap <A-Space> <Esc>/<++><Enter>"_c4l
+noremap <leader>pre :-1read $HOME/docs/tmps/present.tex<CR>
+noremap <leader>book :-1read $HOME/docs/tmps/book.tex<CR>
+noremap <leader><Space> <Esc>/<++><Enter>"_c4l
 " LaTeX Biblography

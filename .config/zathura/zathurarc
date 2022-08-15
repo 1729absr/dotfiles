@@ -1,5 +1,8 @@
 # Zathura configuration file
 
+set synctex true
+set synctex-editor-command "nvr --remote-silent +%{line} %{input}"
+
 set font "Cantarell Bold 14"
 #set font "Mononoki Nerd Font Regular 14"
 set default-bg "#111111"

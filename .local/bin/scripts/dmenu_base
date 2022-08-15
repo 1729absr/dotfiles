@@ -22,7 +22,7 @@ base="-nb $COLOR_BACKGROUND \
 	-i -l 10"
 
 # Bar, Dmenu
-GAP=0
+GAP=2
 
 Z=$((1920 - 2*$GAP))
 DB="-y $GAP -x $GAP -z $Z"

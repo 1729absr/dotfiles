@@ -6,10 +6,14 @@
 [[ $- != *i* ]] && return
 
 # Prompt
-PS1="\[\e[35m\][\[\e[m\]\[\e[35m\]\W\[\e[m\]\[\e[35m\]]\[\e[m\]\[\e[32m\]\\$\[\e[m\] "
-[ -r /home/yoda/.byobu/prompt ] && . /home/yoda/.byobu/prompt   #byobu-prompt#
+BLUE="\[\e[38;2;150;100;250m\]"
+ORANGE="\[\e[38;2;250;150;50m\]"
+PS1="${BLUE}\W${ORANGE}:\[\e[m\] "
+unset BLUE
+unset ORANGE
 
-##
+[ -r /home/yoda/.config/byobu/prompt ] && . /home/yoda/.config/byobu/prompt   #byobu-prompt#
+
 stty -ixon	# Disable ctrl-s and ctrl-q
 shopt -s autocd	# Allows you to cd into dir merely by typing dir name
 set -o vi	# Vi key-bindings in bash
@@ -22,5 +26,4 @@ source $HOME/.config/shell/aliases
 
 [ -d ~/.cache/wal ] && source ~/.cache/wal/colors-tty.sh
 
-# Prompt
-eval "$(starship init bash)"
+source /home/yoda/.config/broot/launcher/bash/br

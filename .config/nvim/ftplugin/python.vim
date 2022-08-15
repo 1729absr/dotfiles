@@ -1,7 +1,8 @@
 "------------------------------------------------------------------------
 " <F9> for running the code
 "------------------------------------------------------------------------
-autocmd FileType python nnoremap <buffer> <F9> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
+nnoremap <buffer> <F9> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
+noremap <leader>py :-1read $HOME/docs/tmps/tmp.py<CR>2jo
 
 "------------------------------------------------------------------------
 " IPython

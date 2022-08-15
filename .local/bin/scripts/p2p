@@ -2,9 +2,13 @@
 
 case $1 in
 	-u)
-		rsync -aP --delete ~/main/ lab:~/main;;
+		rsync -aP --delete ~/main/ lab:~/main;
+		rsync -aP --delete ~/.config/nvim/ lab:~/.config/nvim;
+		rsync -aP --delete ~/.config/shell/ lab:~/.config/shell;;
 	-d)
-		rsync -aP --delete lab:~/main/ ~/main;;
+		rsync -aP --delete lab:~/main/ ~/main;
+		rsync -aP --delete lab:~/.config/nvim/ ~/.config/nvim;
+		rsync -aP --delete lab:~/.config/shell/ ~/.config/shell;;
 	*)
 		echo "Enter: which way to sync";;
 esac

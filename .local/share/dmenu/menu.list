@@ -4,56 +4,38 @@ Reference Manager (Dmenu)	rorg
 Wallpaper Manager	wallpaper
 Zman (Man pages in Zathura)	zman
 Font Manager	dmenu-fontviewer
-Avahi Zeroconf Browser	/usr/bin/avahi-discover
-Bluetooth Adapters	blueman-adapters
-Bluetooth Manager	blueman-manager
+Archive Manager	file-roller 
+HP Device Manager	hp-toolbox
+Kvantum Manager	kvantummanager
+Neovim	st -e nvim 
+ipython	st -e ipython
+picom	picom
+FontForge	fontforge 
+GNU Image Manipulation Program	gimp-2.10 
+Gromit-MPX	gromit-mpx
+XDvi	xdvi 
 Avahi SSH Server Browser	/usr/bin/bssh
 Avahi VNC Server Browser	/usr/bin/bvnc
-CMake	cmake-gui 
-Foliate	com.github.johnfactotum.Foliate 
-Xournal++	xournalpp 
-compton	compton
-PacFinder	pacfinder
-Manage Printing	/usr/bin/xdg-open http://localhost:631/
 Firefox	/usr/lib/firefox/firefox 
-Access Prompt	/usr/lib/gcr-prompter
-View file	/usr/bin/gcr-viewer
-GNU Image Manipulation Program	gimp-2.10 
-GParted	/usr/bin/gparted 
-HP Device Manager	hp-toolbox
-hp-uiscan	/usr/bin/hp-uiscan
-Htop	st -e htop
-ipython	st -e ipython
-Kvantum Manager	kvantummanager
-Hardware Locality lstopo	lstopo
-Customize Look and Feel	lxappearance
-Monitor Settings	lxrandr
-LXTerminal	lxterminal
-mpv Media Player	mpv --player-operation-mode=pseudo-gui -- 
-Gromit-MPX	gromit-mpx
-Network	nm-applet
-Advanced Network Configuration	nm-connection-editor
-Neovim	st -e nvim 
-FontForge	fontforge 
-Feeds	/usr/bin/gfeeds 
-Archive Manager	file-roller 
-Zathura	zathura 
-Zathura	zathura 
-Zathura	zathura 
-Zathura	zathura 
-PulseAudio Volume Control	pavucontrol
-picom	picom
-PolicyKit Authentication Agent	/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-Qt5 Settings	qt5ct
-Qt V4L2 test Utility	qv4l2
-Qt V4L2 video capture utility	qvidcap
-ranger	st -e ranger
-R	st -e R
-sxiv	sxiv 
-Bulk Rename	thunar --bulk-rename 
-Thunar File Manager	thunar 
-File Manager Settings	thunar-settings
+NewsFlash	com.gitlab.newsflash
 Transmission	transmission-gtk 
 uGet	uget-gtk 
-XDvi	xdvi 
-About Xfce	xfce4-about
+Foliate	com.github.johnfactotum.Foliate 
+Xournal++	xournalpp 
+Zathura	zathura 
+CMake	cmake-gui 
+ipython	st -e ipython
+PulseAudio Volume Control	pavucontrol
+Qt V4L2 test Utility	qv4l2
+Qt V4L2 video capture utility	qvidcap
+mpv Media Player	mpv --player-operation-mode=pseudo-gui -- 
+Avahi Zeroconf Browser	/usr/bin/avahi-discover
+Bulk Rename	thunar --bulk-rename 
+GParted	/usr/bin/gparted 
+Hardware Locality lstopo	lstopo
+Htop	st -e htop
+LXTerminal	lstinal
+Manage Printing	/usr/bin/xdg-open http://localhost:631/
+PacFinder	pacfinder
+Thunar File Manager	thunar 
+ranger	st -e ranger

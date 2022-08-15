@@ -1,5 +1,7 @@
 #!/bin/sh
 
+## Use xdg_menu | sed "s/xterm/st/g" | grep -vE "END|MENU" , if using archlinux-xdg-menu
+
 . dmenu_base
 
 menu_file=~/.local/share/dmenu/menu.list
@@ -15,16 +17,19 @@ default(){
 }
 
 update(){
-	Ddir="/usr/share/applications"
-	D_names=$(ls $Ddir|grep .desktop)
 	cat ~/.local/share/dmenu/menu_base.list > $menu_file
-	for D in $D_names; do
-		app_name=$(grep -w "Name=.*" $Ddir/$D|head -n1|sed "s/Name=//")
-		app_exec=$(grep -w "Exec=.*" $Ddir/$D|head -n1|sed "s/Exec=//")
-		terminal=$(grep -w "Terminal=.*" $Ddir/$D|head -n1|sed "s/Terminal=//")
-		[ $terminal = "true" ] && app_exec="st -e "$app_exec
-		echo "$app_name\t$app_exec" | sed "s/%.*//" >> $menu_file
-	done
+	xdg_menu | sed "s/xterm/st/g;s/\"//g;s/  //g" | grep -vE "END|MENU" |\
+			awk -F " EXEC " '{print$1"\t"$2}'>> $menu_file
+	# Ddir="/usr/share/applications"
+	# D_names=$(ls $Ddir|grep .desktop)
+	# for D in $D_names; do
+	# 	grep -w "NoDisplay=true" $Ddir/$D >/dev/null && continue;
+	# 	app_name=$(grep -w "Name=.*" $Ddir/$D|head -n1|sed "s/Name=//")
+	# 	app_exec=$(grep -w "Exec=.*" $Ddir/$D|head -n1|sed "s/Exec=//")
+	# 	terminal=$(grep -w "Terminal=.*" $Ddir/$D|head -n1|sed "s/Terminal=//")
+	# 	[ "$terminal" = "true" ] && app_exec="st -e "$app_exec
+	# 	echo "$app_name\t$app_exec" | sed "s/%.*//" >> $menu_file
+	# done
 }
 
 case $1 in

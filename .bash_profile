@@ -14,6 +14,8 @@ export BROWSER="firefox"
 export READER="zathura"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export RANGER_LOAD_DEFAULT_RC=FALSE
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+export BIB="/home/yoda/main/writing/uni.bib"
 
 # XDG Base Directory
 export XDG_CONFIG_HOME=$HOME/.config
@@ -39,3 +41,5 @@ export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   exec startx "$XDG_CONFIG_HOME/X11/xinitrc"
 fi
+
+source /home/yoda/.config/broot/launcher/bash/br

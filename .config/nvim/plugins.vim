@@ -2,11 +2,13 @@
 " Using vim-plug to call the plugins
 "------------------------------------------------------------------------
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'ap/vim-css-color'
 Plug 'sickill/vim-monokai'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'tomasiser/vim-code-dark'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 call plug#end()
@@ -42,3 +44,4 @@ let g:vimwiki_list = [{'path': '$HOME/main/naonao/wiki',
 " VimSlime
 "------------------------------------------------------------------------
 let g:slime_python_ipython = 1
+let g:slime_target = "neovim"

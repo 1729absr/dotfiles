@@ -109,6 +109,31 @@ keys = [
         lazy.prev_layout(),
         desc="Toggle between layouts"
         ),
+    # Change between different layouts in the layouts list
+    Key(["mod1"], "1",
+        lazy.to_layout_index(0),
+        desc="Switch to monadtall"
+        ),
+    Key(["mod1"], "2",
+        lazy.to_layout_index(1),
+        desc="Switch to max"
+        ),
+    Key(["mod1"], "3",
+        lazy.to_layout_index(2),
+        desc="Switch to bsp"
+        ),
+    Key(["mod1"], "4",
+        lazy.to_layout_index(3),
+        desc="Switch to columns"
+        ),
+    Key(["mod1"], "5",
+        lazy.to_layout_index(4),
+        desc="Switch to verticaltile"
+        ),
+    Key(["mod1"], "6",
+        lazy.to_layout_index(5),
+        desc="Switch to floating"
+        ),
 
     # Kill the window in focus
     Key([mod], "w",
@@ -250,7 +275,7 @@ keys = [
         desc="menu"
         ),
     # -> dmenu_run
-    Key(["mod1"], "Return",
+    Key(["mod1"], "r",
         lazy.spawn("dmenu_mod"),
         desc="dmenu"
         ),
@@ -326,7 +351,7 @@ keys = [
 ]
 
 group_names = [("1", {'label':'', 'layout': 'monadtall'}),
-               ("2", {'label':'', 'layout': 'max'}),
+               ("2", {'label':'', 'layout': 'monadtall'}),
                ("3", {'label':'', 'layout': 'monadtall'}),
                ("4", {'label':'', 'layout': 'monadtall'}),
                ("5", {'label':'', 'layout': 'monadtall'}),
@@ -346,7 +371,7 @@ groups.append(ScratchPad("scratchpad", [DropDown("term", terminal, opacity=1, x=
 keys.append(Key(['mod1'], 'space', lazy.group['scratchpad'].dropdown_toggle('term')))
 
 layout_theme = {"border_width": 2,
-                "margin": 8,
+                "margin": 2,
                 "border_focus": "#04A5AA",
                 "border_normal": "#43576E",#"#303232"
                 "single_border_width": 0,
