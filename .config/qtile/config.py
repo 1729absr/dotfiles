@@ -55,19 +55,19 @@ keys = [
     # Change windowsize.
     # -> In 'columns' layout
     Key([mod, "control"], "h",
-        lazy.layout.grow_left().when(layout='columns'),
+        lazy.layout.grow_left().when(layout={'columns', 'bsp'}),
         desc="Grow window to the right"
         ),
     Key([mod, "control"], "j",
-        lazy.layout.grow_down().when(layout='columns'),
+        lazy.layout.grow_down().when(layout={'columns', 'bsp'}),
         desc="Grow window to the down"
         ),
     Key([mod, "control"], "k",
-        lazy.layout.grow_up().when(layout='columns'),
+        lazy.layout.grow_up().when(layout={'columns', 'bsp'}),
         desc="Grow window to the up"
         ),
     Key([mod, "control"], "l",
-        lazy.layout.grow_right().when(layout='columns'),
+        lazy.layout.grow_right().when(layout={'columns', 'bsp'}),
         desc="Grow window to the left"
         ),
     # -> In monadtall and verticaltile
@@ -82,7 +82,7 @@ keys = [
         ),
     # -> Normalize all
     Key([mod, "control"], "n",
-        lazy.layout.normalize().when(layout=['columns','verticaltile']),
+        lazy.layout.normalize().when(layout=['columns', 'verticaltile', 'bsp']),
         lazy.layout.reset().when(layout='monadtall'),
         desc="Reset all window sizes"
         ),
@@ -233,8 +233,8 @@ keys = [
     # File manager
     # -> Thunar
     Key([mod], "t",
-        lazy.spawn("thunar"),
-        desc="Launch Thunar"
+        lazy.spawn("nemo"),
+        desc="Launch File Manager"
         ),
 
     #configs (for xterm add -wf)
@@ -261,8 +261,13 @@ keys = [
             ),
         # -> sxiv
         Key([], "s",
-            lazy.spawn(terminal+" -e nvim "+home+"/.config/dunst/dunstrc"),
+            lazy.spawn(terminal+" -e nvim "+home+"/.config/sxiv/exec/key-handler"),
             desc="Sxiv Key-handler"
+            ),
+        # -> sxiv
+        Key([], "z",
+            lazy.spawn(terminal+" -e nvim "+home+"/.config/zathura/zathurarc"),
+            desc="Zathura config"
             ),
         ],
         mode="config"
@@ -280,29 +285,30 @@ keys = [
         desc="dmenu"
         ),
     KeyChord([mod], "d", [
-        # -> dmenu-Pass
-        Key([], "p",
-            lazy.spawn("passmenu_mod"),
-            desc="pass"
+        # -> dmenu-ambient-sounds-player
+        Key([], "a",
+            lazy.spawn("ambient"),
+            desc="Ambient Sound Player"
             ),
         # -> dmenu-emoji
         Key([], "e",
             lazy.spawn("dmenuunicode"),
             desc="Emoji support"
             ),
-        # -> dmenu-ambient-sounds-player
-        Key([], "a",
-            lazy.spawn("ambient"),
-            desc="Ambient Sound Player"
+        # -> dmenu-Pass
+        Key([], "p",
+            lazy.spawn("passmenu_mod"),
+            desc="pass"
+            ),
+        # -> PowerMenu
+        Key([mod], "p",
+            lazy.spawn("powermenu"),
+            desc="powermenu"
             ),
         # -> dmenu of papers and books organiser
         Key([], "r",
             lazy.spawn("rorg"),
             desc="Research Paper Organiser"
-            ),
-        # -> PowerMenu
-        Key([mod], "p",
-            lazy.spawn("powermenu")
             ),
             ],
         mode='dmenu'
@@ -371,11 +377,11 @@ groups.append(ScratchPad("scratchpad", [DropDown("term", terminal, opacity=1, x=
 keys.append(Key(['mod1'], 'space', lazy.group['scratchpad'].dropdown_toggle('term')))
 
 layout_theme = {"border_width": 2,
-                "margin": 2,
-                "border_focus": "#04A5AA",
-                "border_normal": "#43576E",#"#303232"
-                "single_border_width": 0,
-                "border_on_single": False
+                "margin": 8,
+                "border_focus": "#43576E",
+                "border_normal": "#303232",
+                #"single_border_width": 0,
+                #"border_on_single": False
                 }
 
 layout_theme_ = layout_theme.copy()
@@ -401,6 +407,7 @@ widget_defaults = dict(
     font='mononoki Nerd Font Bold',
     fontsize=24,
     padding=4,
+    foreground='#cccccc'
 )
 
 extension_defaults = widget_defaults.copy()
@@ -409,20 +416,14 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-		        widget.TextBox(
-                    text = "  ",
-                    padding = 0,
-		        	foreground="#1793d1",
-                    mouse_callbacks={'Button1': lazy.spawn("menu"),}
-                    ),
                 widget.GroupBox(
                     fontsize=28,
                     borderwidth=1,
 		        	rounded=False,
                     highlight_method="text",
-		        	inactive = "#666666",
-                    active='#dddddd',
-                    this_current_screen_border="#1793d1",#"#589cc5",
+		        	inactive = "#999999",
+                    active='#cccccc',
+                    this_current_screen_border="#006688",
                     disable_drag=True,
 		        	),
 		        widget.Sep(
@@ -431,7 +432,7 @@ screens = [
 		        	foreground="#575757",
 		        	),
 		        widget.CurrentLayout(
-		        	foreground="#AABBCC",
+		        	foreground="#888888",
 		        	),
 		        widget.Sep(
 		        	linewidth=1,
@@ -440,10 +441,10 @@ screens = [
 		        	),
                 widget.Chord(
                     chords_colors={
-                                    'config': ("#171919", "#1793d1"),
-                                    'dmenu': ("#171919", "#994477"),
-                                    'mouse': ("#171919", "#998775"),
-                                    'backlight': ("#171919", "#cccc11"),
+                                    'config': ("#222222", "#1793d1"),
+                                    'dmenu': ("#222222", "#994477"),
+                                    'mouse': ("#222222", "#998775"),
+                                    'backlight': ("#222222", "#cccc11"),
                                   },
                     ),
                 widget.Prompt(
@@ -456,7 +457,7 @@ screens = [
                     max_chars=40,
                     fontsize=20,
                     mouse_callbacks={
-                        'Button1':lazy.spawn("xdotool key ctrl+k"),
+                        'Button1':lazy.spawn("xdotool key ctrl+l"),
                         'Button2':lazy.window.kill(),
                         'Button3':lazy.spawn("xdotool key F1"),
                         'Button4':lazy.layout.up(),
@@ -507,14 +508,14 @@ screens = [
                     'Button5': lambda: qtile.cmd_spawn("calendar n"),}
 		        	),
                 widget.TextBox(
-                    text = "",
+                    text = "",
                     #foreground="#AA7700",
                     padding = 10,
                     mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("powermenu")}
                     ),
             ],
             34,
-            background="#171717",#"#1b1d24",
+            background="#242424",
             margin=[gap, gap, 0, gap],
 	        #opacity=0.1
         ),

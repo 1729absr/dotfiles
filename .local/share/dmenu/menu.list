@@ -4,38 +4,20 @@ Reference Manager (Dmenu)	rorg
 Wallpaper Manager	wallpaper
 Zman (Man pages in Zathura)	zman
 Font Manager	dmenu-fontviewer
+NewsBoat	st -e newsboat
 Archive Manager	file-roller 
-HP Device Manager	hp-toolbox
-Kvantum Manager	kvantummanager
+Nemo	nemo 
 Neovim	st -e nvim 
-ipython	st -e ipython
 picom	picom
-FontForge	fontforge 
-GNU Image Manipulation Program	gimp-2.10 
-Gromit-MPX	gromit-mpx
-XDvi	xdvi 
 Avahi SSH Server Browser	/usr/bin/bssh
 Avahi VNC Server Browser	/usr/bin/bvnc
 Firefox	/usr/lib/firefox/firefox 
-NewsFlash	com.gitlab.newsflash
-Transmission	transmission-gtk 
-uGet	uget-gtk 
-Foliate	com.github.johnfactotum.Foliate 
-Xournal++	xournalpp 
 Zathura	zathura 
-CMake	cmake-gui 
-ipython	st -e ipython
 PulseAudio Volume Control	pavucontrol
 Qt V4L2 test Utility	qv4l2
 Qt V4L2 video capture utility	qvidcap
 mpv Media Player	mpv --player-operation-mode=pseudo-gui -- 
 Avahi Zeroconf Browser	/usr/bin/avahi-discover
-Bulk Rename	thunar --bulk-rename 
-GParted	/usr/bin/gparted 
 Hardware Locality lstopo	lstopo
 Htop	st -e htop
-LXTerminal	lstinal
-Manage Printing	/usr/bin/xdg-open http://localhost:631/
-PacFinder	pacfinder
-Thunar File Manager	thunar 
 ranger	st -e ranger

@@ -1,11 +1,11 @@
 #!/bin/sh
 
-[ -d "$HOME/.cache/wal" ] && . "${HOME}/.cache/wal/colors.sh" || . "$HOME/.local/bin/scripts/dmenu_base" && color3=$COLOR_HIGHLIGHT
+[ -d "$HOME/.cache/wal" ] && . "${HOME}/.cache/wal/colors.sh" || . "$HOME/.local/bin/scripts/dmenu_base"
 send_notification() {
 	TODAY=$(date '+%-d')
 	HEAD=$(cal "$1" | head -n1)
 	case $HEAD in 
-	*$(date '+%-B %Y')*) BODY=$(cal "$1" | tail -n7 | sed -z "s|$TODAY|<u><b><span foreground='$color3'>$TODAY</span></b></u>|1");;
+	*$(date '+%-B %Y')*) BODY=$(cal "$1" | tail -n7 | sed -z "s|$TODAY|<u><b><span foreground='$COLOR_HIGHLIGHT'>$TODAY</span></b></u>|1");;
 	*) BODY=$(cal "$1" | tail -n7 );;
 	esac
 	dunstify -r "43561" -u low -t 0 "" "$HEAD\n$BODY\n^"

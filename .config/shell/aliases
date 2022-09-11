@@ -9,7 +9,7 @@ alias ip='ip -color=auto'
 alias la='ls -A --group-directories-first'
 alias ll='ls -lA --group-directories-first'
 alias vim='nvim'
-alias dfiles='/usr/bin/git --git-dir="$XDG_CONFIG_HOME"/dotfiles --work-tree=/home/yoda'
+alias dfiles='/usr/bin/git --git-dir="$XDG_CONFIG_HOME"/dotfiles --work-tree=$HOME'
 alias p='sudo pacman'
 alias ss='sudo systemctl'
 alias yt='yt-dlp -o "/home/yoda/vids/%(title)s.%(ext)s" --add-metadata -ic $(xclip -o)'
@@ -33,7 +33,14 @@ alias sc="cd $HOME/.local/bin/scripts"
 alias fc="cd $HOME/.mozilla/firefox/geuo0fq7.default-release/chrome"
 
 # fzf ->
-cf() { du -a $HOME/.local/bin/scripts/* $HOME/.config/* | awk '{print $2}' | fzf -e -i --preview="nvim {+}" | xargs -r $EDITOR; }
-wr() { find $HOME/main/writing/ -name "*.tex" | fzf -e -i --preview="nvim {+}" | xargs -r $EDITOR; }
-wrc() { find $HOME/main/writing/ -name "*.py" | fzf -e -i --preview="nvim {+}" | xargs -r $EDITOR; }
-wrp() { find $HOME/main/writing/ -name "*.pdf" | fzf -e -i | xargs -r devour $READER;}
+cf() {
+	du -a $HOME/.local/bin/scripts/* $HOME/.config/* | awk '{print $2}' | fzf -e -i --preview="nvim {+}" | xargs -r $EDITOR;
+}
+
+wr() {
+	ranger $HOME/main/writing/;
+}
+
+# Python
+alias py="source $XDG_DATA_HOME/python_venv/bin/activate"
+alias pre="source $XDG_DATA_HOME/prefab/bin/activate"

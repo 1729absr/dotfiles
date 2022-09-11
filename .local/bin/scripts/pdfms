@@ -1,4 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 name=${1:0:${#1}-3};
 groff -ms $name.ms -T pdf > $name.pdf
-devour zathura $name.pdf

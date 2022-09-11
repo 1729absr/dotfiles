@@ -25,5 +25,3 @@ HISTFILE=~/.cache/bash/history
 source $HOME/.config/shell/aliases
 
 [ -d ~/.cache/wal ] && source ~/.cache/wal/colors-tty.sh
-
-source /home/yoda/.config/broot/launcher/bash/br

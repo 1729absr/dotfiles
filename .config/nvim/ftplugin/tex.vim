@@ -7,10 +7,12 @@
 "------------------------------------------------------------------------
 
 function! Synctex()
-        " remove 'silent' for debugging
-        execute "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . bufname('%') . " " . g:syncpdf
+  let filename=bufname("%")
+  let filenamePDF=filename[:-4]."pdf"
+  exec "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . filename . " " . filenamePDF 
+  redraw!
 endfunction
-map <C-enter> :call Synctex()<cr>
+map <C-z> :call Synctex()<cr>
 
 nnoremap <buffer> <F9> :w<CR>:exec '!pdflatex ' shellescape(@%, 1)<CR>
 

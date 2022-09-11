@@ -14,7 +14,7 @@ add(){
 	(IFS='
 	'
 	for doc in $docs_list; do 
-		info=$(pdfinfo $doc | grep -E "Author|Title" | sed "s/  //g; s/Title:/\t/g; s/Author:/: /")
+		info=$(pdfinfo $doc | grep -aE "Author|Title" | sed "s/  //g; s/Title:/\t/g; s/Author:/: /")
 		printf "$info"
 		info_str_test=$(echo $info|sed 's/ //g')
 		[ -n $info_str_test ] && echo $doc$info >> $docs_file

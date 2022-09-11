@@ -12,6 +12,11 @@ set path+=**
 " Display all the matching files when we tab complete
 set wildmenu
 
+" For going over far away
+set colorcolumn=81
+"highlight ColorColumn ctermbg=magenta
+"call matchadd ('ColorColumn', '%81v', 100)
+
 " Synctex
 let g:vimtex_view_method = 'zathura'
 let g:latex_view_general_viewer = 'zathura'
@@ -21,10 +26,10 @@ let g:vimtex_compiler_progname = 'nvr'
 command! MakeTags !ctags -R .
 
 " Plugins
-source ~/.config/nvim/plugins.vim
+source /home/naonao/.config/nvim/plugins.vim
 
 colorscheme codedark
 set laststatus=2
 
 " Key-bindings
-source ~/.config/nvim/bindings.vim
+source /home/naonao/.config/nvim/bindings.vim

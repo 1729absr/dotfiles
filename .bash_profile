@@ -39,7 +39,5 @@ export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
 
 # Start GUI
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  exec startx "$XDG_CONFIG_HOME/X11/xinitrc"
+  exec startx "$XDG_CONFIG_HOME/X11/xinitrc" --vt1 &> /dev/null
 fi
-
-source /home/yoda/.config/broot/launcher/bash/br

@@ -1,28 +1,31 @@
 #!/bin/sh
 
-FONT="MononokiNerdFont-18"
+#FONT="MononokiNerdFont-18"
+#
+#COLOR_BACKGROUND="#151515"
+#COLOR_DEFAULT="#aaaaaa"
+#COLOR_HIGHLIGHT="#1793d1"
+#SELECTED_BACKGROUND="#1b1d24"
+#
+### If wanna use the pywal color scheme comment it out
+##. "${HOME}/.cache/wal/colors.sh"
+##COLOR_BACKGROUND=$color0
+##COLOR_DEFAULT=$color15
+##COLOR_HIGHLIGHT=$color15
+##SELECTED_BACKGROUND=$color2
+#
+#base="-nb $COLOR_BACKGROUND \
+#	-nf $COLOR_DEFAULT \
+#	-sf $COLOR_HIGHLIGHT \
+#	-sb $SELECTED_BACKGROUND \
+#	-fn $FONT\
+#	-i -l 10"
 
-COLOR_BACKGROUND="#151515"
-COLOR_DEFAULT="#aaaaaa"
-COLOR_HIGHLIGHT="#1793d1"
-SELECTED_BACKGROUND="#1b1d24"
-
-## If wanna use the pywal color scheme comment it out
-#. "${HOME}/.cache/wal/colors.sh"
-#COLOR_BACKGROUND=$color0
-#COLOR_DEFAULT=$color15
-#COLOR_HIGHLIGHT=$color15
-#SELECTED_BACKGROUND=$color2
-
-base="-nb $COLOR_BACKGROUND \
-	-nf $COLOR_DEFAULT \
-	-sf $COLOR_HIGHLIGHT \
-	-sb $SELECTED_BACKGROUND \
-	-fn $FONT\
-	-i -l 10"
+COLOR_HIGHLIGHT="#006688"
+base="-i"
 
 # Bar, Dmenu
-GAP=2
+GAP=0
 
 Z=$((1920 - 2*$GAP))
 DB="-y $GAP -x $GAP -z $Z"

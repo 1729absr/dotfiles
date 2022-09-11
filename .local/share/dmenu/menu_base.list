@@ -4,3 +4,4 @@ Reference Manager (Dmenu)	rorg
 Wallpaper Manager	wallpaper
 Zman (Man pages in Zathura)	zman
 Font Manager	dmenu-fontviewer
+NewsBoat	st -e newsboat
