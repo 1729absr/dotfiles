@@ -32,10 +32,11 @@ let g:lightline = {
 "------------------------------------------------------------------------
 " VimWiki
 "------------------------------------------------------------------------
-let g:vimwiki_list = [{'path': '$HOME/main/naonao/wiki',
-			\ 'template_path': '/home/yoda/main/naonao/templates/',
+let g:vimwiki_list = [{'path': '$HOME/main/web/absr/wiki',
+			\ 'template_path': '~/main/web/absr/templates/',
 			\ 'template_ext': '.html',
 			\ 'template_default': 'default',
+			\ 'css_path' : '~/main/web/absr/templates/',
 			\ 'css_name': 'style.css'}]
 "let g:vimwiki_list = [{'path': '$HOME/main/naonao/content',
 "                      \ 'syntax': 'markdown', 'ext': '.md'}]

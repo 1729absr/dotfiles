@@ -11,11 +11,13 @@ set keymap vi-command
 Control-l: clear-screen
 Control-a: beginning-of-line
 Control-e: end-of-line
+Control-w: unix-word-rubout
 
 set keymap vi-insert
 # these are for vi-insert mode
 Control-l: clear-screen
 Control-a: beginning-of-line
 Control-e: end-of-line
+Control-w: unix-word-rubout
 
 $endif

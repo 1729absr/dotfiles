@@ -12,8 +12,8 @@ alias vim='nvim'
 alias dfiles='/usr/bin/git --git-dir="$XDG_CONFIG_HOME"/dotfiles --work-tree=$HOME'
 alias p='sudo pacman'
 alias ss='sudo systemctl'
-alias yt='yt-dlp -o "/home/yoda/vids/%(title)s.%(ext)s" --add-metadata -ic $(xclip -o)'
-alias yta='yt-dlp -o "/home/yoda/music/%(title)s.%(ext)s" --add-metadata -xic $(xclip -o)'
+alias yt='yt-dlp -o "$HOME/vids/%(title)s.%(ext)s" --add-metadata -ic $(xclip -o)'
+alias yta='yt-dlp -o "$HOME/music/%(title)s.%(ext)s" --add-metadata -xic $(xclip -o)'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias gpg2='gpg2 --homedir "$XDG_DATA_HOME"/gnupg'
 
@@ -34,7 +34,8 @@ alias fc="cd $HOME/.mozilla/firefox/geuo0fq7.default-release/chrome"
 
 # fzf ->
 cf() {
-	du -a $HOME/.local/bin/scripts/* $HOME/.config/* | awk '{print $2}' | fzf -e -i --preview="nvim {+}" | xargs -r $EDITOR;
+	du -a $HOME/.local/bin/scripts/* $HOME/.config/* | awk '{print $2}' |\
+		fzf -e -i --preview="nvim {+}" | xargs -r $EDITOR;
 }
 
 wr() {

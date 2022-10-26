@@ -185,6 +185,15 @@ keys = [
         lazy.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle"),
         desc="Mute Mic"
         ),
+    Key([],"XF86AudioPlay",
+        lazy.spawn("playerctl play-pause"),
+        ),
+    Key([],"XF86AudioNext",
+        lazy.spawn("playerctl next"),
+        ),
+    Key([],"XF86AudioPrev",
+        lazy.spawn("playerctl previous"),
+        ),
     # Pavucontrol
     Key([mod], "p",
         lazy.spawn("pavucontrol"),
@@ -480,7 +489,7 @@ screens = [
                     padding = 0
                     ),
 		        widget.Backlight(
-		        	backlight_name='intel_backlight',
+		        	backlight_name='amdgpu_bl0',
                     change_command="brightnessctl -s set {0}%",
                     step=2
 		        	),

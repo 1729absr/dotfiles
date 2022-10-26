@@ -5,19 +5,3 @@ Wallpaper Manager	wallpaper
 Zman (Man pages in Zathura)	zman
 Font Manager	dmenu-fontviewer
 NewsBoat	st -e newsboat
-Archive Manager	file-roller 
-Nemo	nemo 
-Neovim	st -e nvim 
-picom	picom
-Avahi SSH Server Browser	/usr/bin/bssh
-Avahi VNC Server Browser	/usr/bin/bvnc
-Firefox	/usr/lib/firefox/firefox 
-Zathura	zathura 
-PulseAudio Volume Control	pavucontrol
-Qt V4L2 test Utility	qv4l2
-Qt V4L2 video capture utility	qvidcap
-mpv Media Player	mpv --player-operation-mode=pseudo-gui -- 
-Avahi Zeroconf Browser	/usr/bin/avahi-discover
-Hardware Locality lstopo	lstopo
-Htop	st -e htop
-ranger	st -e ranger

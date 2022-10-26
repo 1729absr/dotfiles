@@ -1,3 +1,12 @@
+" Plugins
+source /home/naonao/.config/nvim/plugins.vim
+
+" Key-bindings
+source /home/naonao/.config/nvim/bindings.vim
+
+colorscheme codedark
+set laststatus=2
+
 set noshowmode
 set number relativenumber
 set mouse=a
@@ -13,9 +22,9 @@ set path+=**
 set wildmenu
 
 " For going over far away
-set colorcolumn=81
-"highlight ColorColumn ctermbg=magenta
-"call matchadd ('ColorColumn', '%81v', 100)
+" set colorcolumn=81
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
 
 " Synctex
 let g:vimtex_view_method = 'zathura'
@@ -25,11 +34,3 @@ let g:vimtex_compiler_progname = 'nvr'
 " Making tags includings sub-dir contents
 command! MakeTags !ctags -R .
 
-" Plugins
-source /home/naonao/.config/nvim/plugins.vim
-
-colorscheme codedark
-set laststatus=2
-
-" Key-bindings
-source /home/naonao/.config/nvim/bindings.vim
