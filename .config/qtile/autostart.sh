@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+!/usr/bin/sh
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 nm-applet &
 #picom -b &

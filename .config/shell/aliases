@@ -44,4 +44,4 @@ wr() {
 
 # Python
 alias py="source $XDG_DATA_HOME/python_venv/bin/activate"
-alias pre="source $XDG_DATA_HOME/prefab/bin/activate"
+alias ml="source $XDG_DATA_HOME/machine_learning/bin/activate"

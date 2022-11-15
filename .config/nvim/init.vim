@@ -1,8 +1,8 @@
 " Plugins
-source /home/naonao/.config/nvim/plugins.vim
+source ~/.config/nvim/plugins.vim
 
 " Key-bindings
-source /home/naonao/.config/nvim/bindings.vim
+source ~/.config/nvim/bindings.vim
 
 colorscheme codedark
 set laststatus=2

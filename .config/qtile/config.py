@@ -109,31 +109,31 @@ keys = [
         lazy.prev_layout(),
         desc="Toggle between layouts"
         ),
-    # Change between different layouts in the layouts list
-    Key(["mod1"], "1",
-        lazy.to_layout_index(0),
-        desc="Switch to monadtall"
-        ),
-    Key(["mod1"], "2",
-        lazy.to_layout_index(1),
-        desc="Switch to max"
-        ),
-    Key(["mod1"], "3",
-        lazy.to_layout_index(2),
-        desc="Switch to bsp"
-        ),
-    Key(["mod1"], "4",
-        lazy.to_layout_index(3),
-        desc="Switch to columns"
-        ),
-    Key(["mod1"], "5",
-        lazy.to_layout_index(4),
-        desc="Switch to verticaltile"
-        ),
-    Key(["mod1"], "6",
-        lazy.to_layout_index(5),
-        desc="Switch to floating"
-        ),
+#    # Change between different layouts in the layouts list
+#    Key(["mod1"], "1",
+#        lazy.to_layout_index(0),
+#        desc="Switch to monadtall"
+#        ),
+#    Key(["mod1"], "2",
+#        lazy.to_layout_index(1),
+#        desc="Switch to max"
+#        ),
+#    Key(["mod1"], "3",
+#        lazy.to_layout_index(2),
+#        desc="Switch to bsp"
+#        ),
+#    Key(["mod1"], "4",
+#        lazy.to_layout_index(3),
+#        desc="Switch to columns"
+#        ),
+#    Key(["mod1"], "5",
+#        lazy.to_layout_index(4),
+#        desc="Switch to verticaltile"
+#        ),
+#    Key(["mod1"], "6",
+#        lazy.to_layout_index(5),
+#        desc="Switch to floating"
+#        ),
 
     # Kill the window in focus
     Key([mod], "w",
@@ -219,7 +219,7 @@ keys = [
             desc="Brightness Down"
             ),
         ],
-        mode="backlight"
+        name="backlight"
         ),
 
     # PrintScreen saves it to $HOME/Pictures/Scrot
@@ -279,7 +279,7 @@ keys = [
             desc="Zathura config"
             ),
         ],
-        mode="config"
+        name="config"
         ),
 
     # Dmenu
@@ -320,7 +320,7 @@ keys = [
             desc="Research Paper Organiser"
             ),
             ],
-        mode='dmenu'
+        name='dmenu'
         ),
 
     # Control mouse from keyboard
@@ -361,12 +361,12 @@ keys = [
             desc="cick left mouse button"
             ),
             ],
-        mode='mouse'
+        name='mouse'
         ),
 ]
 
 group_names = [("1", {'label':'', 'layout': 'monadtall'}),
-               ("2", {'label':'', 'layout': 'monadtall'}),
+               ("2", {'label':'', 'layout': 'max'}),
                ("3", {'label':'', 'layout': 'monadtall'}),
                ("4", {'label':'', 'layout': 'monadtall'}),
                ("5", {'label':'', 'layout': 'monadtall'}),
@@ -398,7 +398,7 @@ layout_theme_["margin"] = 0
 
 layouts = [
     layout.MonadTall(**layout_theme),
-    layout.Max(**layout_theme),
+    layout.Max(),
     layout.Bsp(**layout_theme_),
     layout.Columns(**layout_theme),
     layout.VerticalTile(**layout_theme_),
@@ -466,9 +466,7 @@ screens = [
                     max_chars=40,
                     fontsize=20,
                     mouse_callbacks={
-                        'Button1':lazy.spawn("xdotool key ctrl+l"),
                         'Button2':lazy.window.kill(),
-                        'Button3':lazy.spawn("xdotool key F1"),
                         'Button4':lazy.layout.up(),
                         'Button5':lazy.layout.down(),}
                     ),
