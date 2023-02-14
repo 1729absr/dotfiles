@@ -8,7 +8,7 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/.local/bin/scripts
 export HISTCONTROL=ignoreboth
 export TERM="st"
 export TERMINAL="st"
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export MANPAGER="less --mouse -R --use-color -Dd+r -Du+b"
 export EDITOR="nvim"
 export BROWSER="firefox"
 export READER="zathura"
@@ -16,6 +16,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export BIB="/home/yoda/main/writing/uni.bib"
+#export GTK_THEME=Adwaita:dark
 
 # XDG Base Directory
 export XDG_CONFIG_HOME=$HOME/.config

@@ -40,3 +40,5 @@ set recolor-reverse-video "true"
 
 #set render-loading-bg "#333333"
 set recolor-keephue "true"
+
+map <C-o> feedkeys ":exec sh -c \"echo $FILE | xclip -i -sel clip\"<Return>"

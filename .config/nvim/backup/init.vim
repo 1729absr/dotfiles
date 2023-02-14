@@ -22,8 +22,8 @@ set path+=**
 set wildmenu
 
 " For going over far away
-" set colorcolumn=81
-highlight ColorColumn ctermbg=magenta
+"set colorcolumn=81
+"highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
 " Synctex

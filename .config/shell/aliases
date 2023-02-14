@@ -30,7 +30,6 @@ alias vncviewer='devour vncviewer'
 
 # Bookmarks ->
 alias sc="cd $HOME/.local/bin/scripts"
-alias fc="cd $HOME/.mozilla/firefox/geuo0fq7.default-release/chrome"
 
 # fzf ->
 cf() {

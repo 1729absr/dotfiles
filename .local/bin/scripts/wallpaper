@@ -87,7 +87,7 @@ set_wal_bing(){
 }
 
 copy_fav() { \
-	fav_dir=$XDG_PICTURES_DIR/wallpapers/selected/
+	fav_dir=$XDG_PICTURES_DIR/wallpapers/
 	[ -f "${WP}" ] &&\
 		if [ -d $fav_dir ]; then
 			fav_name=selected_$(date '+%Y-%m-%d_%H-%M-%S')".jpg" &&\
@@ -105,9 +105,10 @@ if [ -z $1 ]; then
 	ba=".."
 	co="Copy current wallpaper to favourites"
 	cl="Set wallpaper from a local file"
+	sc="Set a solid color as wallpaper"
 	cu="Change Wallpaper - unsplash as source"
 	cb="Change Wallpaper - bing as source"
-	chosen=$(echo "$ba\n$co\n$cl\n$cu\n$cb"|dmenu $base $DB -p " ")
+	chosen=$(echo "$ba\n$co\n$cl\n$sc\n$cu\n$cb"|dmenu $base $DB -p " ")
 	
 	# Exit if none chosen.
 	[ -z "$chosen" ] && exit
@@ -118,17 +119,12 @@ if [ -z $1 ]; then
 		$co)
 			copy_fav;;
 		$cl)
-			local_dir=$(ls -1 "$XDG_PICTURES_DIR/wallpapers/"|dmenu\
-				$base $DB -p "Select one or enter Path:")
-			[ -z "$local_dir" ] && exit
-			
-				if [ $local_dir = ".." ]
-				then
-					wallpaper && exit
-				else
-					sxiv -tb -r $XDG_PICTURES_DIR/wallpapers/$local_dir && wallpaper
-				fi
-				;;
+			sxiv -tb -r $XDG_PICTURES_DIR/wallpapers && wallpaper;;
+		$sc)
+			convert -size 1920x1200 xc:$(yad --color --title="Set solid background") $WP.png &&\
+				mv $WP.png $WP &&\
+				default "solid color" &&\
+				wallpaper;; 
 		$cu)
 			set_wal_unsplash;;
 		$cb)

@@ -1,4 +1,4 @@
-" SpellCheck
+												" SpellCheck
 map <F2> :set spell!<CR>
 " emacs binding to move to start or end of line in insert mode.
 inoremap <C-a> <esc>I
@@ -11,7 +11,7 @@ noremap 'j o<esc>
 noremap 'k O<esc>
 " <Esc> to exit terminal-mode:
 tnoremap <Esc> <C-\><C-n>
-" To use `ALT+{h,j,k,l}` to navigate windows from any mode:
+" To use `Ctrl+{h,j,k,l}` to navigate windows from any mode:
 tnoremap <C-h> <C-\><C-N><C-w>h
 tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
@@ -24,6 +24,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+	nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
 "------------------------------------------------------------------------
 " <F9> for running the code

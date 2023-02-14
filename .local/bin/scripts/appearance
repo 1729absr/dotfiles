@@ -1,3 +1,6 @@
 #!/bin/sh
 
-lxappearance $1 && [ -f "$HOME/.gtkrc-2.0" ] && mv $HOME/.gtkrc-2.0 $XDG_CONFIG_HOME/gtk-2.0/gtkrc && rm -r $XDG_DATA_HOME/icons && mv $HOME/.icons $XDG_DATA_HOME/icons
+lxappearance $1 &&\
+	cp $XDG_CONFIG_HOME/gtk-3.0/settings.ini $XDG_CONFIG_HOME/gtk-4.0/settings.ini &&\
+	[ -f "$HOME/.gtkrc-2.0" ] && mv $HOME/.gtkrc-2.0 $XDG_CONFIG_HOME/gtk-2.0/gtkrc &&\
+	[ -d "$XDG_DATA_HOME/icons" ] && rm -r $XDG_DATA_HOME/icons && mv $HOME/.icons $XDG_DATA_HOME/icons

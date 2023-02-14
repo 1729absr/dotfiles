@@ -23,5 +23,6 @@ SAVEHIST=10000000
 HISTFILE=~/.cache/bash/history
 
 source $HOME/.config/shell/aliases
+source $XDG_DATA_HOME/python_venv/bin/activate
 
 [ -d ~/.cache/wal ] && source ~/.cache/wal/colors-tty.sh

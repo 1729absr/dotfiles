@@ -8,22 +8,40 @@ NewsBoat	st -e newsboat
 Archive Manager	file-roller 
 Nemo	nemo 
 Neovim	st -e nvim 
-Lutris	lutris 
+Redshift	redshift-gtk
+picom	picom
+scrcpy	/bin/sh -c '$SHELL -i -c scrcpy'
+scrcpy (console)	st -e /bin/bash --norc --noprofile -i -c '$SHELL -i -c scrcpy || read -p Press any key to quit...'
+GNU Image Manipulation Program	gimp-2.10 
 XDvi	xdvi 
 Avahi SSH Server Browser	/usr/bin/bssh
 Avahi VNC Server Browser	/usr/bin/bvnc
+Discord	/usr/bin/discord
 Firefox	/usr/lib/firefox/firefox 
+KDE Connect	kdeconnect-app
+KDE Connect Indicator	kdeconnect-indicator
+KDE Connect SMS	kdeconnect-sms
+Mailspring	mailspring 
+Open on connected device via KDE Connect	kdeconnect-handler --open 
+Web	epiphany 
 uGet	uget-gtk 
-HomeBank	homebank 
+Foliate	com.github.johnfactotum.Foliate 
+Obsidian	/usr/bin/obsidian 
 Zathura	zathura 
+Electron 21	electron21 
+Icon Browser	yad-icon-browser
+Blanket	blanket
 Kid3-qt	kid3-qt 
+OpenShot Video Editor	openshot-qt 
 PulseAudio Volume Control	pavucontrol
 Qt V4L2 test Utility	qv4l2
 Qt V4L2 video capture utility	qvidcap
 mpv Media Player	mpv --player-operation-mode=pseudo-gui -- 
 Alacritty	alacritty
 Avahi Zeroconf Browser	/usr/bin/avahi-discover
+GParted	/usr/bin/gparted 
 Hardware Locality lstopo	lstopo
 Htop	st -e htop
-Manage Printing	/usr/bin/xdg-open http://localhost:631/
+Manage Printing	xdg-open http://localhost:631/
+dconf Editor	dconf-editor
 ranger	st -e ranger
