@@ -1,20 +1,23 @@
-from typing import List
 from libqtile import qtile, bar, layout, widget, hook
-from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, ScratchPad, DropDown
+from libqtile.config import Click, Drag, Group, Key,\
+        KeyChord, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
-#from libqtile.utils import guess_terminal
 import os
 import subprocess
+# from typing import List
+# from libqtile.utils import guess_terminal
 
 home = os.path.expanduser('~')
 gap = int(
-        subprocess.getoutput(
-            "grep GAP= " + 
-            home +
-            "/.local/bin/scripts/dmenu_base | awk -F '=' '{print $2}'")
-        )
+    subprocess.getoutput(
+        "grep GAP= " +
+        home +
+        "/.local/bin/scripts/dmenu_base | awk -F '=' '{print $2}'")
+)
 mod = "mod4"
+
 terminal = "st"
+
 keys = [
     # Switch between windows
     Key([mod], "h",
@@ -87,7 +90,8 @@ keys = [
         ),
     # -> Normalize all
     Key([mod, "control"], "n",
-        lazy.layout.normalize().when(layout=['columns', 'verticaltile', 'bsp']),
+        lazy.layout.normalize().when(
+            layout=['columns', 'verticaltile', 'bsp']),
         lazy.layout.reset().when(layout='monadtall'),
         desc="Reset all window sizes"
         ),
@@ -161,7 +165,7 @@ keys = [
         lazy.spawncmd(),
         desc="Spawn a command using a prompt widget"
         ),
-    
+
     # Toggle fullscreen or floating mode
     Key([mod], "f",
         lazy.window.toggle_fullscreen(),
@@ -173,30 +177,30 @@ keys = [
         ),
 
     # Audio control
-    Key([],"XF86AudioRaiseVolume",
+    Key([], "XF86AudioRaiseVolume",
         lazy.spawn("change_volume +2%"),
         desc="Volume Up"
         ),
-    Key([],"XF86AudioLowerVolume",
+    Key([], "XF86AudioLowerVolume",
         lazy.spawn("change_volume -2%"),
         desc="Volume Down"
         ),
-    Key([],"XF86AudioMute",
+    Key([], "XF86AudioMute",
         lazy.spawn("change_volume toggle"),
         #lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"),
         desc="Mute Audio"
         ),
-    Key([],"XF86AudioMicMute",
+    Key([], "XF86AudioMicMute",
         lazy.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle"),
         desc="Mute Mic"
         ),
-    Key([],"XF86AudioPlay",
+    Key([], "XF86AudioPlay",
         lazy.spawn("playerctl play-pause"),
         ),
-    Key([],"XF86AudioNext",
+    Key([], "XF86AudioNext",
         lazy.spawn("playerctl next"),
         ),
-    Key([],"XF86AudioPrev",
+    Key([], "XF86AudioPrev",
         lazy.spawn("playerctl previous"),
         ),
     # Pavucontrol
@@ -223,9 +227,9 @@ keys = [
             lazy.spawn("brightnessctl -s set 1%-"),
             desc="Brightness Down"
             ),
-        ],
+    ],
         name="backlight"
-        ),
+    ),
     Key([mod], "q",
         lazy.spawn("dunstctl close-all"),
         desc="Close all Dunst notifications"
@@ -249,17 +253,22 @@ keys = [
         ),
 
     # File manager
-    # -> Thunar
+    # -> Nemo
     Key([mod], "t",
         lazy.spawn("nemo"),
         desc="Launch File Manager"
         ),
+    # -> ranger
+    Key(['mod1'], 'Return',
+        lazy.spawn('st -e bash -c "ranger"')
+        ),
 
-    #configs (for xterm add -wf)
+    # configs (for xterm add -wf)
     KeyChord([mod], "c", [
         # -> autostart
         Key([], "a",
-            lazy.spawn(terminal+" -e nvim "+home+"/.config/qtile/autostart.sh"),
+            lazy.spawn(terminal+" -e nvim "+home + \
+                       "/.config/qtile/autostart.sh"),
             desc="Autostart"
             ),
         # -> dunst
@@ -279,7 +288,8 @@ keys = [
             ),
         # -> sxiv
         Key([], "s",
-            lazy.spawn(terminal+" -e nvim "+home+"/.config/sxiv/exec/key-handler"),
+            lazy.spawn(terminal+" -e nvim "+home + \
+                       "/.config/sxiv/exec/key-handler"),
             desc="Sxiv Key-handler"
             ),
         # -> sxiv
@@ -287,9 +297,9 @@ keys = [
             lazy.spawn(terminal+" -e nvim "+home+"/.config/zathura/zathurarc"),
             desc="Zathura config"
             ),
-        ],
+    ],
         name="config"
-        ),
+    ),
 
     # Dmenu
     # -> dmenu desktop files
@@ -323,9 +333,9 @@ keys = [
             lazy.spawn("rorg"),
             desc="Research Paper Organiser"
             ),
-            ],
+    ],
         name='dmenu'
-        ),
+    ),
 
     # Control mouse from keyboard
     KeyChord([mod], "m", [
@@ -364,54 +374,50 @@ keys = [
             lazy.spawn("xdotool click 3"),
             desc="cick left mouse button"
             ),
-            ],
+    ],
         name='mouse'
-        ),
+    ),
 ]
 
-group_names = [("1", {'label':'', 'layout': 'monadtall'}),
-               ("2", {'label':'', 'layout': 'max'}),
-               ("3", {'label':'', 'layout': 'monadtall'}),
-               ("4", {'label':'', 'layout': 'monadtall'}),
-               ("5", {'label':'', 'layout': 'monadtall'}),
-               ("6", {'label':'', 'layout': 'monadtall'}),
-               ("7", {'label':'', 'layout': 'floating'}),
-               ("8", {'label':'', 'layout': 'monadtall'}),
-               ("9", {'label':'', 'layout': 'monadtall'})]
+group_names = [("1", {'label': '', 'layout': 'monadtall'}),
+               ("2", {'label': '', 'layout': 'max'}),
+               ("3", {'label': '', 'layout': 'monadtall'}),
+               ("4", {'label': '', 'layout': 'monadtall'}),
+               ("5", {'label': '', 'layout': 'monadtall'}),
+               ("6", {'label': '', 'layout': 'monadtall'}),
+               ("7", {'label': '', 'layout': 'floating'}),
+               ("8", {'label': '', 'layout': 'monadtall'}),
+               ("9", {'label': '', 'layout': 'monadtall'})]
 
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
 for i, (name, kwargs) in enumerate(group_names, 1):
-	keys.append(Key([mod], str(i), lazy.group[name].toscreen(toggle=True)))        # Switch to another group
-	keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name, switch_group=True))) # Send current window to another group
+    # Switch to another group
+    keys.append(Key([mod], str(i), lazy.group[name].toscreen(toggle=True)))
+    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(
+        name, switch_group=True)))  # Send current window to another group
 
 groups.append(
-        ScratchPad("scratchpad",
-                   [
-                       DropDown("term",
-                                terminal, opacity=1, x=0.05, y=0, height=0.6,
-                                width=0.9, on_focus_lost_hide=True),
-                       DropDown("ranger",
-                                "st -e ranger", opacity=1, x=0.05, y=0, height=0.6,
-                                width=0.9, on_focus_lost_hide=False)
-                       ])
-                   )
+    ScratchPad("scratchpad",
+               [
+                   DropDown("term",
+                            terminal, opacity=1, x=0.05, y=0, height=0.6,
+                            width=0.9, on_focus_lost_hide=True),
+               ])
+)
 keys += [
-        Key(['mod1'], 'space',
-            lazy.group['scratchpad'].dropdown_toggle('term')
-            ),
-        Key(['mod1'], 'Return',
-            lazy.group['scratchpad'].dropdown_toggle('ranger')
-            )
-        ]
+    Key(['mod1'], 'space',
+        lazy.group['scratchpad'].dropdown_toggle('term')
+        ),
+]
 
 layout_theme = {"border_width": 2,
                 "margin": 8,
                 "border_focus": "#43576E",
                 "border_normal": "#3b4252",
-                #"single_border_width": 0,
-                #"border_on_single": False
+                # "single_border_width": 0,
+                # "border_on_single": False
                 }
 
 layout_theme_ = layout_theme.copy()
@@ -449,110 +455,112 @@ screens = [
                 widget.GroupBox(
                     fontsize=14,
                     borderwidth=1,
-		        	rounded=False,
+                    rounded=False,
                     highlight_method="text",
-		        	inactive = "#3b4252",
+                    inactive="#3b4252",
                     active='#5e81ac',
                     this_current_screen_border="#b48ead",
                     disable_drag=True,
-		        	),
-		        widget.Sep(
-		        	linewidth=1,
-		        	padding=5,
-		        	foreground="#3b4252",
-		        	),
-		        widget.CurrentLayout(
-		        	foreground="#4c566a",
-		        	),
-		        widget.Sep(
-		        	linewidth=1,
-		        	padding=5,
-		        	foreground="#3b4252",
-		        	),
+                ),
+                widget.Sep(
+                    linewidth=1,
+                    padding=5,
+                    foreground="#3b4252",
+                ),
+                widget.CurrentLayout(
+                    foreground="#4c566a",
+                ),
+                widget.Sep(
+                    linewidth=1,
+                    padding=5,
+                    foreground="#3b4252",
+                ),
                 widget.Chord(
                     chords_colors={
-                                    'config': ("#222222", "#1793d1"),
-                                    'dmenu': ("#222222", "#994477"),
-                                    'mouse': ("#222222", "#998775"),
-                                    'backlight': ("#222222", "#cccc11"),
-                                  },
-                    ),
-		        widget.WindowName(
+                        'config': ("#222222", "#1793d1"),
+                        'dmenu': ("#222222", "#994477"),
+                        'mouse': ("#222222", "#998775"),
+                        'backlight': ("#222222", "#cccc11"),
+                    },
+                ),
+                widget.WindowName(
                     max_chars=40,
                     fontsize=20,
                     mouse_callbacks={
-                        'Button2':lazy.window.kill(),
-                        'Button4':lazy.layout.up(),
-                        'Button5':lazy.layout.down(),}
-                    ),
+                        'Button2': lazy.window.kill(),
+                        'Button4': lazy.layout.up(),
+                        'Button5': lazy.layout.down(), }
+                ),
                 widget.Cmus(
-		        	background='3d3f4b',
+                    background='3d3f4b',
                     play_color='76C92D',
                     max_chars=25,
-                    ),
+                ),
                 widget.TextBox(
-                    text = " ",
-                    padding = 0
-                    ),
+                    text=" ",
+                    padding=0
+                ),
                 widget.Systray(
-		        	icon_size=32,
-		        	),
-		        widget.TextBox(
-                    text = "  ",
-                    padding = 0,
+                    icon_size=32,
+                ),
+                widget.TextBox(
+                    text="  ",
+                    padding=0,
                     mouse_callbacks={
                         'Button4': lazy.spawn("brightnessctl -s set +2%", shell=True),
                         'Button5': lazy.spawn("brightnessctl -s set 2%-", shell=True)
-                        }
-                    ),
-		        widget.Backlight(
-		        	backlight_name='amdgpu_bl0',
+                    }
+                ),
+                widget.Backlight(
+                    backlight_name='amdgpu_bl0',
                     change_command="brightnessctl -s set {0}%",
                     step=2
-		        	),
+                ),
                 widget.GenPollText(
                     update_interval=1,
-                    func=lambda: subprocess.check_output("show_volume").decode(),
+                    func=lambda: subprocess.check_output(
+                        "show_volume").decode(),
                     mouse_callbacks={
                         'Button4': lazy.spawn("change_volume +2%", shell=True),
                         'Button5': lazy.spawn("change_volume -2%", shell=True),
                         'Button3': lazy.spawn("change_volume toggle", shell=True),
                         'Button2': lazy.spawn("pavucontrol", shell=True)
-                        }
-                    ),
+                    }
+                ),
                 widget.TextBox(
-                    text = " ",
-                    padding = 0
-                    ),
+                    text=" ",
+                    padding=0
+                ),
                 widget.GenPollText(
                     update_interval=2,
                     func=lambda: subprocess.check_output("battery").decode(),
-                    ),
+                ),
                 widget.TextBox(
-                    text = " ",
-                    padding = 0
-                    ),
+                    text=" ",
+                    padding=0
+                ),
                 widget.ThermalSensor(
-                        format='🌡️{temp:.0f}{unit}'
-                        ),
+                    format='🌡️{temp:.0f}{unit}'
+                ),
                 widget.Clock(
-		        	padding=0,
+                    padding=0,
                     format=' %H:%M',
-                    mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("calendar c"),
-                    'Button4': lambda: qtile.cmd_spawn("calendar p"),
-                    'Button5': lambda: qtile.cmd_spawn("calendar n"),}
-		        	),
+                    mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("calendar c"),
+                                     'Button4': lambda: qtile.cmd_spawn("calendar p"),
+                                     'Button5': lambda: qtile.cmd_spawn("calendar n"), }
+                ),
                 widget.TextBox(
-                    text = "",
-                    #foreground="#AA7700",
-                    padding = 15,
-                    mouse_callbacks={"Button1":lambda:qtile.cmd_spawn("powermenu")}
-                    ),
+                    text="",
+                    # foreground="#AA7700",
+                    padding=15,
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn("powermenu")}
+                ),
             ],
             38,
             background="#191919",
             margin=[gap, gap, 0, gap],
-	        #opacity=0.1
+            # opacity=0.1
         ),
     ),
 ]
@@ -560,20 +568,20 @@ screens = [
 # Drag floating layouts.
 mouse = [
     Drag([mod], "Button1",
-        lazy.window.set_position_floating(),
-        start=lazy.window.get_position()
-        ),
+         lazy.window.set_position_floating(),
+         start=lazy.window.get_position()
+         ),
     Drag([mod], "Button3",
-        lazy.window.set_size_floating(),
-        start=lazy.window.get_size()
-        ),
-    Drag([mod,"mod1"], "Button1",
-        lazy.window.set_size_floating(),
-        start=lazy.window.get_size()
-        ),
+         lazy.window.set_size_floating(),
+         start=lazy.window.get_size()
+         ),
+    Drag([mod, "mod1"], "Button1",
+         lazy.window.set_size_floating(),
+         start=lazy.window.get_size()
+         ),
     Click([mod], "Button2",
-        lazy.window.bring_to_front()
-        ),
+          lazy.window.bring_to_front()
+          ),
 ]
 
 dgroups_key_binder = None
@@ -588,27 +596,30 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='confirmreset'),  # gitk
     Match(wm_class='makebranch'),  # gitk
     Match(wm_class='maketag'),  # gitk
-    Match(wm_class='hp-toolbox'),   #hp-printer
+    Match(wm_class='hp-toolbox'),  # hp-printer
     Match(wm_class='lxappearance'),
     Match(wm_class='Blueberry.py'),
     Match(wm_class='ssh-askpass'),  # ssh-askpass
-    Match(wm_class='pavucontrol'), # pavucontrol-gtk
-    Match(wm_class='pinentry-gtk-2'), # Pass
+    Match(wm_class='pavucontrol'),  # pavucontrol-gtk
+    Match(wm_class='pinentry-gtk-2'),  # Pass
     Match(wm_class='matplotlib'),
     Match(wm_class='xbindkeys_show'),
     Match(wm_class='display'),  # ImageMagick Display
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
     Match(title='Set solid background'),  # GPG key password entry
-],**layout_theme)
+], **layout_theme)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
+
 def f1():
-    os.system(home + '/.config/qtile/autostart.sh')
+    os.system(home + '/.config/qtile/autostart_xorg.sh')
     lazy.to_screen(1)
     lazy.spawn("firefox")
     lazy.to_screen(0)
+
+
 hook.subscribe.startup_once(f1)
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this

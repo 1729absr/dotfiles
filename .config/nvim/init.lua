@@ -159,14 +159,14 @@ vim.keymap.set('n', '<C-S-Down>', '<C-w><S-j>', { silent = true })
 vim.keymap.set('n', '<C-S-Left>', '<C-w><S-h>', { silent = true })
 vim.keymap.set('n', '<C-S-Right>', '<C-w><S-l>', { silent = true })
 
-
+vim.keymap.set('n', '<F2>', ':set spell!<CR>', {silent = true})
 -- Emacs binding to move to start or end of line in insert mode.
 vim.keymap.set('i', '<C-a>', '<esc>I')
 vim.keymap.set('i', '<C-e>', '<esc>A')
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- [[ Highlight on yank ]]
   -- See `:help vim.highlight.on_yank()`

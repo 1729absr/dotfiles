@@ -1,0 +1,44 @@
+# Zathura configuration file
+
+set synctex true
+set synctex-editor-command "nvr --remote-silent +%{line} %{input}"
+
+set font "Cantarell Bold 14"
+#set font "Mononoki Nerd Font Regular 14"
+set default-bg "#111111"
+set default-fg "#F7F7F7"
+
+#set guioptions "v"
+
+set statusbar-fg "#B0B0B0"
+set statusbar-bg "#222222"
+
+set statusbar-v-padding "4"
+
+set inputbar-bg "#151515"
+set inputbar-fg "#FFFFFF"
+
+set completion-bg "#151515"
+set completion-fg "#aaaaaa"
+set completion-group-bg "#252525"
+set completion-group-fg "#dddddd"
+set completion-highlight-bg "#1c1c1c"
+set completion-highlight-fg "#589cc5"
+
+set index-fg "#aaaaaa"
+set index-bg "#151515"
+set index-active-fg "#589cc5"
+set index-active-bg "#1c1c1c"
+
+set notification-bg "#333333"
+set notification-fg "#dddddd"
+
+set recolor "true"
+set recolor-lightcolor          "#181818"
+set recolor-darkcolor           "#CCCCCC" 
+set recolor-reverse-video "true"
+
+#set render-loading-bg "#333333"
+set recolor-keephue "true"
+
+map <C-o> feedkeys ":exec sh -c \"echo $FILE | xclip -i -sel clip\"<Return>"

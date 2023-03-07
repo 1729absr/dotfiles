@@ -12,11 +12,12 @@ export MANPAGER="less --mouse -R --use-color -Dd+r -Du+b"
 export EDITOR="nvim"
 export BROWSER="firefox"
 export READER="zathura"
-export QT_QPA_PLATFORMTHEME=qt5ct
+# export QT_QPA_PLATFORMTHEME=qt5ct
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export BIB="/home/yoda/main/writing/uni.bib"
-#export GTK_THEME=Adwaita:dark
+export MOZ_ENABLE_WAYLAND=1 firefox
+export GTK_THEME=Breeze:dark
 
 # XDG Base Directory
 export XDG_CONFIG_HOME=$HOME/.config
@@ -35,10 +36,11 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 export ANDROID_HOME="$XDG_DATA_HOME"/android
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+# export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
 
 # Start GUI
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   exec startx "$XDG_CONFIG_HOME/X11/xinitrc" --vt1 &> /dev/null
+  # exec qtile start -b wayland
 fi

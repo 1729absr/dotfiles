@@ -23,14 +23,12 @@ KDE Connect Indicator	kdeconnect-indicator
 KDE Connect SMS	kdeconnect-sms
 Mailspring	mailspring 
 Open on connected device via KDE Connect	kdeconnect-handler --open 
-Web	epiphany 
 uGet	uget-gtk 
 Foliate	com.github.johnfactotum.Foliate 
 Obsidian	/usr/bin/obsidian 
 Zathura	zathura 
 Electron 21	electron21 
 Icon Browser	yad-icon-browser
-Blanket	blanket
 Kid3-qt	kid3-qt 
 OpenShot Video Editor	openshot-qt 
 PulseAudio Volume Control	pavucontrol
